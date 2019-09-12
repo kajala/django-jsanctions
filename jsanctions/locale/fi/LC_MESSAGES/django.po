@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-12 05:39+0000\n"
+"POT-Creation-Date: 2019-09-12 09:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -114,7 +114,7 @@ msgstr "kohteen tyypit"
 #: jsanctions/models.py:211 jsanctions/models.py:233 jsanctions/models.py:247
 #: jsanctions/models.py:275
 msgid "sanction entity"
-msgstr "sanktion kohde"
+msgstr "pakotteen kohde"
 
 #: jsanctions/models.py:132 jsanctions/models.py:147
 msgid "regulation type"
@@ -351,4 +351,4 @@ msgstr "EU viite"
 
 #: jsanctions/models.py:276
 msgid "sanction entities"
-msgstr "sanktioiden kohteet"
+msgstr "pakotteiden kohteet"
