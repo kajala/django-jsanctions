@@ -18,7 +18,7 @@ setup(
     author_email='kajala@gmail.com',
     packages=find_packages(exclude=['project', 'venv']),
     include_package_data=True,
-    url='',
+    url='https://github.com/kajala/django-jsanctions',
     license='MIT licence, see LICENCE.txt',
     description='Parses and imports EU combined sanction lists for Django projects',
     long_description=open('README.md').read(),
