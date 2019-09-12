@@ -396,10 +396,12 @@ class SanctionEntityAdmin(SanctionsListAdminBase):
         assert isinstance(obj, SanctionEntity)
         all_names = ', '.join([e.whole_name for e in obj.namealias_set.all()])
         return all_names
+    name_aliases.short_description = _('name aliases')
 
     def birth_year(self, obj) -> str:
         assert isinstance(obj, SanctionEntity)
         return ', '.join([str(e.year) for e in obj.birthdate_set.all().distinct('year')])
+    birth_year.short_description = _('birth year')
 
 
 admin.site.register(EuCombinedSanctionsList, EuCombinedSanctionsListAdmin)

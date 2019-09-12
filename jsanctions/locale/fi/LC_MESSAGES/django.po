@@ -1,0 +1,354 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-12 05:22+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: jsanctions/admin.py:281
+msgid "decade born"
+msgstr "syntymävuosi"
+
+#: jsanctions/admin.py:314
+msgid "residence country"
+msgstr "asuinpaikka"
+
+#: jsanctions/admin.py:336
+msgid "citizenship country"
+msgstr "kansalaisuus"
+
+#: jsanctions/admin.py:399 jsanctions/models.py:175
+msgid "name aliases"
+msgstr "nimen aliakset"
+
+#: jsanctions/admin.py:404
+msgid "birth year"
+msgstr "syntymävuosi"
+
+#: jsanctions/apps.py:7
+msgid "Sanction Lists"
+msgstr "Pakotelistat"
+
+#: jsanctions/models.py:15 jsanctions/models.py:107
+msgid "remark"
+msgstr "muistiinpano"
+
+#: jsanctions/models.py:22 jsanctions/models.py:153
+msgid "regulation summary"
+msgstr "säädöksen yhteenveto"
+
+#: jsanctions/models.py:55
+msgid "created"
+msgstr "luotu"
+
+#: jsanctions/models.py:56
+msgid "imported"
+msgstr "importoitu"
+
+#: jsanctions/models.py:57
+msgid "generation date"
+msgstr "luontipäivämäärä"
+
+#: jsanctions/models.py:58
+msgid "file"
+msgstr "tiedosto"
+
+#: jsanctions/models.py:61
+msgid "sanction list"
+msgstr "pakotelista"
+
+#: jsanctions/models.py:62
+msgid "sanction lists"
+msgstr "pakotelistat"
+
+#: jsanctions/models.py:74
+msgid "global file id"
+msgstr "globaali tiedoston tunnus"
+
+#: jsanctions/models.py:77
+msgid "EU combined sanction list"
+msgstr "EU:n yhdistetty pakotelista"
+
+#: jsanctions/models.py:78
+msgid "EU combined sanction lists"
+msgstr "EU:n yhdistetyt pakotelistat"
+
+#: jsanctions/models.py:104
+msgid "text"
+msgstr "teksti"
+
+#: jsanctions/models.py:108
+msgid "remarks"
+msgstr "muistiinpanot"
+
+#: jsanctions/models.py:119
+msgid "code"
+msgstr "koodi"
+
+#: jsanctions/models.py:120
+msgid "classification code"
+msgstr "luokitus"
+
+#: jsanctions/models.py:123 jsanctions/models.py:272
+msgid "subject type"
+msgstr "kohteen tyyppi"
+
+#: jsanctions/models.py:124
+msgid "subject types"
+msgstr "kohteen tyypit"
+
+#: jsanctions/models.py:131 jsanctions/models.py:161 jsanctions/models.py:186
+#: jsanctions/models.py:211 jsanctions/models.py:233 jsanctions/models.py:247
+#: jsanctions/models.py:275
+msgid "sanction entity"
+msgstr "sanktion kohde"
+
+#: jsanctions/models.py:132 jsanctions/models.py:147
+msgid "regulation type"
+msgstr "säädöksen tyyppi"
+
+#: jsanctions/models.py:133
+msgid "organization type"
+msgstr "organisaation tyyppi"
+
+#: jsanctions/models.py:134 jsanctions/models.py:149
+msgid "publication date"
+msgstr "julkaisupäivämäärä"
+
+#: jsanctions/models.py:135 jsanctions/models.py:150
+msgid "url"
+msgstr "verkko-osoite"
+
+#: jsanctions/models.py:136
+msgid "entry into force date"
+msgstr "pakotteen alkamispäivämäärä"
+
+#: jsanctions/models.py:137 jsanctions/models.py:148
+msgid "number title"
+msgstr "numero"
+
+#: jsanctions/models.py:138
+msgid "programmer"
+msgstr "ohjelmoija"
+
+#: jsanctions/models.py:139 jsanctions/models.py:170 jsanctions/models.py:202
+#: jsanctions/models.py:225 jsanctions/models.py:238 jsanctions/models.py:258
+#: jsanctions/models.py:271
+msgid "logical id"
+msgstr "looginen tunnus"
+
+#: jsanctions/models.py:142
+msgid "regulation"
+msgstr "säädös"
+
+#: jsanctions/models.py:143
+msgid "regulations"
+msgstr "säädökset"
+
+#: jsanctions/models.py:154
+msgid "regulation summaries"
+msgstr "säädöksen yhteenvedot"
+
+#: jsanctions/models.py:162
+msgid "first name"
+msgstr "etunimi"
+
+#: jsanctions/models.py:163
+msgid "middle name"
+msgstr "toinen nimi"
+
+#: jsanctions/models.py:164
+msgid "last name"
+msgstr "sukunimi"
+
+#: jsanctions/models.py:165
+msgid "whole name"
+msgstr "koko nimi"
+
+#: jsanctions/models.py:166
+msgid "name language"
+msgstr "nimen kieli"
+
+#: jsanctions/models.py:167
+msgid "function"
+msgstr "toimenkuva"
+
+#: jsanctions/models.py:168
+msgid "title"
+msgstr "titteli"
+
+#: jsanctions/models.py:169
+msgid "regulation language"
+msgstr "säädöksen kieli"
+
+#: jsanctions/models.py:174
+msgid "name alias"
+msgstr "nimen alias"
+
+#: jsanctions/models.py:187
+msgid "diplomatic"
+msgstr "diplomaatti"
+
+#: jsanctions/models.py:188
+msgid "known expired"
+msgstr "tiedettävästi rauennut"
+
+#: jsanctions/models.py:189
+msgid "known false"
+msgstr "tiedettävästi väärennös"
+
+#: jsanctions/models.py:190
+msgid "reported lost"
+msgstr "raportoitu kadonneeksi"
+
+#: jsanctions/models.py:191
+msgid "revoked by issuer"
+msgstr "myöntäjän peruutettama"
+
+#: jsanctions/models.py:192 jsanctions/models.py:197
+msgid "issued by"
+msgstr "myöntäjän nimi"
+
+#: jsanctions/models.py:193
+msgid "latin number"
+msgstr "latin.numero"
+
+#: jsanctions/models.py:194
+msgid "name on document"
+msgstr "nimi dokumentissa"
+
+#: jsanctions/models.py:195
+msgid "number"
+msgstr "numero"
+
+#: jsanctions/models.py:196 jsanctions/models.py:220 jsanctions/models.py:234
+#: jsanctions/models.py:254
+msgid "region"
+msgstr "alue"
+
+#: jsanctions/models.py:198 jsanctions/models.py:223 jsanctions/models.py:236
+#: jsanctions/models.py:256
+msgid "country description"
+msgstr "maan kuvaus"
+
+#: jsanctions/models.py:199 jsanctions/models.py:200
+msgid "identification type code"
+msgstr "tunnisteen tyyppikoodi"
+
+#: jsanctions/models.py:201 jsanctions/models.py:224 jsanctions/models.py:237
+#: jsanctions/models.py:257
+msgid "regional language"
+msgstr "alueellinen kieli"
+
+#: jsanctions/models.py:206
+msgid "identification"
+msgstr "tunniste"
+
+#: jsanctions/models.py:207
+msgid "identifications"
+msgstr "tunnisteet"
+
+#: jsanctions/models.py:212
+msgid "circa"
+msgstr "arvio"
+
+#: jsanctions/models.py:213
+msgid "calendar type"
+msgstr "kalenterin tyyppi"
+
+#: jsanctions/models.py:214 jsanctions/models.py:248
+msgid "city"
+msgstr "kaupunki"
+
+#: jsanctions/models.py:215 jsanctions/models.py:251
+msgid "zip code"
+msgstr "postinumero"
+
+#: jsanctions/models.py:216 jsanctions/models.py:228
+msgid "birth date"
+msgstr "syntymäaika"
+
+#: jsanctions/models.py:217
+msgid "day of month"
+msgstr "kuukauden päivä"
+
+#: jsanctions/models.py:218
+msgid "month of year"
+msgstr "vuoden kuukausi"
+
+#: jsanctions/models.py:219
+msgid "year"
+msgstr "vuosi"
+
+#: jsanctions/models.py:221 jsanctions/models.py:253
+msgid "place"
+msgstr "paikka"
+
+#: jsanctions/models.py:222 jsanctions/models.py:235 jsanctions/models.py:255
+msgid "country"
+msgstr "maa"
+
+#: jsanctions/models.py:229
+msgid "birth dates"
+msgstr "syntymäpäivät"
+
+#: jsanctions/models.py:242
+msgid "citizenship"
+msgstr "kansalaisuus"
+
+#: jsanctions/models.py:243
+msgid "citizenships"
+msgstr "kansalaisuudet"
+
+#: jsanctions/models.py:249
+msgid "street"
+msgstr "katuosoite"
+
+#: jsanctions/models.py:250
+msgid "p.o. box"
+msgstr "postilokero"
+
+#: jsanctions/models.py:252
+msgid "as at listing time"
+msgstr "listausaikana"
+
+#: jsanctions/models.py:262
+msgid "address"
+msgstr "osoite"
+
+#: jsanctions/models.py:263
+msgid "addresses"
+msgstr "osoitteet"
+
+#: jsanctions/models.py:267
+msgid "source"
+msgstr "lähde"
+
+#: jsanctions/models.py:268
+msgid "designation details"
+msgstr "luokittelun yksityiskohdat"
+
+#: jsanctions/models.py:269
+msgid "United Nation identifier"
+msgstr "YK tunnus"
+
+#: jsanctions/models.py:270
+msgid "EU reference number"
+msgstr "EU viite"
+
+#: jsanctions/models.py:276
+msgid "sanction entities"
+msgstr "sanktioiden kohteet"
