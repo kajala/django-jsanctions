@@ -1,5 +1,7 @@
 import logging
 import os
+
+from django.conf import settings
 from django.core.management import CommandParser
 from django.db import transaction
 from django.utils.timezone import now
@@ -112,6 +114,7 @@ class Command(SafeCommand):
     help = "Imports EU combined sanction lists and saves results to the DB"
 
     def add_arguments(self, parser: CommandParser):
+        parser.add_argument('--url', type=str)
         parser.add_argument('--file', type=str)
         parser.add_argument('--delete-old', action='store_true')
         parser.add_argument('--source', type=int)
@@ -121,7 +124,10 @@ class Command(SafeCommand):
     def do(self, *args, **options):
         verbose = options['verbose']
         source = None
-        if options['file']:
+        if options['url']:
+            filename = options['file'] if options['file'] else 'EU-combined-{}.xml'.format(now().date().isoformat())
+            source = EuCombinedSanctionsList.objects.create_from_url(options['url'], filename)
+        elif options['file']:
             source = EuCombinedSanctionsList.objects.create_from_filename(options['file'])
         elif options['source']:
             source = EuCombinedSanctionsList.objects.get(id=options['source'])

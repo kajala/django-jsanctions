@@ -1,13 +1,18 @@
+import logging
 import os
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.files import File
+from django.core.files.base import ContentFile
 from django.db import models
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 from jutil.parse import parse_datetime, parse_bool
 from jutil.xml import xml_to_dict
 from jsanctions.helpers import xml_dict_filter_attributes
+
+
+logger = logging.getLogger(__name__)
 
 
 REMARK_BRIEF_LENGTH = 128
@@ -44,6 +49,15 @@ class SanctionsListFileManager(models.Manager):
             file = self.create(**kwargs)
             file.file.save(plain_filename, File(fp))
             return file
+
+    def create_from_url(self, url: str, filename: str, **kwargs):
+        import urllib.request
+        response = urllib.request.urlopen(url)
+        body = response.read()
+        plain_filename = os.path.basename(filename)
+        file = self.create(**kwargs)
+        file.file.save(plain_filename, ContentFile(body))
+        return file
 
 
 class SanctionListObject(models.Model):
