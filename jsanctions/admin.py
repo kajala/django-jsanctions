@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib import messages
 from django.db.models import QuerySet
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from jutil.admin import ModelAdminBase, AdminFileDownloadMixin
 from jsanctions.models import EuCombinedSanctionsList, SubjectType, Regulation, RegulationSummary, \
     Remark, NameAlias, SanctionEntity, BirthDate, Identification, Citizenship, Address
