@@ -1,13 +1,12 @@
 import logging
 import os
 from django.conf import settings
-from django.core.exceptions import ValidationError
 from django.core.files import File
 from django.core.files.base import ContentFile
 from django.db import models
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
-from jutil.parse import parse_datetime, parse_bool
+from jutil.parse import parse_datetime
 from jutil.xml import xml_to_dict
 from jsanctions.helpers import xml_dict_filter_attributes
 

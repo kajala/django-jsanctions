@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.contrib import messages
-from django.db.models import QuerySet
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from jutil.admin import ModelAdminBase, AdminFileDownloadMixin
@@ -296,18 +295,18 @@ class DecadeBornListFilter(admin.SimpleListFilter):
             begin += 10
         return opts
 
-    def queryset(self, request, qs):
+    def queryset(self, request, queryset):
         try:
             if self.value():
                 begin, end = self.value().split('-')
                 if begin:
-                    qs = qs.filter(birthdate__year__gte=int(begin))
+                    queryset = queryset.filter(birthdate__year__gte=int(begin))
                 if end:
-                    qs = qs.filter(birthdate__year__lte=int(end))
+                    queryset = queryset.filter(birthdate__year__lte=int(end))
         except Exception as e:
             messages.error(request, str(e))
-            qs = SanctionEntity.objects.none()
-        return qs
+            queryset = SanctionEntity.objects.none()
+        return queryset
 
 
 class AddressCountryFilter(admin.SimpleListFilter):
@@ -321,15 +320,15 @@ class AddressCountryFilter(admin.SimpleListFilter):
             opts.append((obj.country_iso2_code, obj.country_description))
         return opts
 
-    def queryset(self, request, qs):
+    def queryset(self, request, queryset):
         try:
             country = self.value()
             if country:
-                qs = SanctionEntity.objects.filter(address__country_iso2_code=country)
+                queryset = SanctionEntity.objects.filter(address__country_iso2_code=country)
         except Exception as e:
             messages.error(request, str(e))
-            qs = SanctionEntity.objects.none()
-        return qs
+            queryset = SanctionEntity.objects.none()
+        return queryset
 
 
 class CitizenshipCountryFilter(admin.SimpleListFilter):
@@ -343,15 +342,15 @@ class CitizenshipCountryFilter(admin.SimpleListFilter):
             opts.append((obj.country_iso2_code, obj.country_description))
         return opts
 
-    def queryset(self, request, qs):
+    def queryset(self, request, queryset):
         try:
             country = self.value()
             if country:
-                qs = SanctionEntity.objects.filter(citizenship__country_iso2_code=country)
+                queryset = SanctionEntity.objects.filter(citizenship__country_iso2_code=country)
         except Exception as e:
             messages.error(request, str(e))
-            qs = SanctionEntity.objects.none()
-        return qs
+            queryset = SanctionEntity.objects.none()
+        return queryset
 
 
 class SanctionEntityAdmin(SanctionsListAdminBase):

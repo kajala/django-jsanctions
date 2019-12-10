@@ -1,7 +1,6 @@
+#pylint: disable=too-many-locals,logging-format-interpolation
 import logging
 import os
-
-from django.conf import settings
 from django.core.management import CommandParser
 from django.db import transaction
 from django.utils.timezone import now
@@ -44,15 +43,15 @@ def eu_set_simple_members(obj, data: dict, commit: bool = True, verbose: bool = 
             k = camel_case_to_underscore(k0)
             if hasattr(obj, k):
                 if k == 'subject_type':
-                    obj2, created = SubjectType.objects.get_or_create(
+                    obj2 = SubjectType.objects.get_or_create(
                         code=v0.get('@code', ''),
-                        classification_code=v0.get('@classificationCode', ''))
+                        classification_code=v0.get('@classificationCode', ''))[0]
                 elif k == 'regulation_summary':
-                    obj2, created = RegulationSummary.objects.get_or_create(
+                    obj2 = RegulationSummary.objects.get_or_create(
                         regulation_type=v0.get('@regulationType', ''),
                         publication_date=v0.get('@publicationDate', None),
                         publication_url=v0.get('@publicationUrl', ''),
-                        number_title=v0.get('@numberTitle', ''))
+                        number_title=v0.get('@numberTitle', ''))[0]
                 else:
                     obj2 = class_map[k0]()
                     kwargs2 = {}
@@ -135,7 +134,8 @@ class Command(SafeCommand):
             source = EuCombinedSanctionsList.objects.filter(imported=None).order_by('id').first()
 
         if not source:
-            return print('Nothing to import')
+            print('Nothing to import')
+            return
 
         if options['delete_old']:
             for e in EuCombinedSanctionsList.objects.all().exclude(id=source.id):
