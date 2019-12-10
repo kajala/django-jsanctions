@@ -14,7 +14,7 @@ from jsanctions.models import EuCombinedSanctionsList, SanctionEntity, Regulatio
 logger = logging.getLogger(__name__)
 
 
-def eu_set_simple_members(obj, data: dict, commit: bool = True, verbose: bool = True, padding: int = 0, **kwargs):
+def eu_set_simple_members(obj, data: dict, commit: bool = True, verbose: bool = True, padding: int = 0, **kwargs):  # noqa
     class_map = {
         'regulationSummary': RegulationSummary,
         'subjectType': SubjectType,
