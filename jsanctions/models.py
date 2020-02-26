@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 REMARK_BRIEF_LENGTH = 128
-DEFAULT_DESCRIPTION_TYPE = {'blank': True, 'max_length': 256, 'default': ''}
+DEFAULT_DESCRIPTION_TYPE = {'blank': True, 'max_length': 512, 'default': ''}
 DEFAULT_REMARK_TYPE = {'verbose_name':_('remark'), 'null': True, 'default': None, 'blank': True, 'on_delete': models.SET_NULL}
 DEFAULT_CODE_TYPE = {'blank': True, 'max_length': 32, 'default': ''}
 DEFAULT_DATE_TYPE = {'blank': True, 'null': True, 'default': None}

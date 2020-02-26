@@ -14,8 +14,8 @@ from jsanctions.models import EuCombinedSanctionsList, SanctionEntity, Regulatio
 logger = logging.getLogger(__name__)
 
 
-def eu_set_object_attr(obj, k: str, v, max_length: int = 256):
-    if v and isinstance(v, str) and len(v) > 256:
+def eu_set_object_attr(obj, k: str, v, max_length: int = 512):
+    if v and isinstance(v, str) and len(v) > max_length:
         logger.warning('{key} value truncated to {max_length} characters. Original was: "{original}"'.format(
             key=k, original=v, max_length=max_length))
         v = v[:max_length]
