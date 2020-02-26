@@ -14,6 +14,14 @@ from jsanctions.models import EuCombinedSanctionsList, SanctionEntity, Regulatio
 logger = logging.getLogger(__name__)
 
 
+def eu_set_object_attr(obj, k: str, v, max_length: int = 256):
+    if v and isinstance(v, str) and len(v) > 256:
+        logger.warning('{key} value truncated to {max_length} characters. Original was: "{original}"'.format(
+            key=k, original=v, max_length=max_length))
+        v = v[:max_length]
+    setattr(obj, k, v)
+
+
 def eu_set_simple_members(obj, data: dict, commit: bool = True, verbose: bool = True, padding: int = 0, **kwargs):  # noqa
     class_map = {
         'regulationSummary': RegulationSummary,
@@ -36,7 +44,7 @@ def eu_set_simple_members(obj, data: dict, commit: bool = True, verbose: bool = 
             if k == 'birthdate':
                 k = 'birth_date'  # special case because class name same as attribute
             if hasattr(obj, k):
-                setattr(obj, k, v0)
+                eu_set_object_attr(obj, k, v0)
                 if verbose:
                     logger.info('{}{}: {} = {}'.format(padding_str, obj, k, v0))
         elif k0 in class_map:
@@ -57,12 +65,12 @@ def eu_set_simple_members(obj, data: dict, commit: bool = True, verbose: bool = 
                     kwargs2 = {}
                     kwargs2[k] = obj2
                     for k2, v2 in kwargs.items():
-                        setattr(obj2, k2, v2)
+                        eu_set_object_attr(obj2, k2, v2)
                         kwargs2[k2] = v2
 
                     eu_set_simple_members(obj2, v0, verbose=verbose, padding=padding+4, **kwargs2)
 
-                setattr(obj, k, obj2)
+                eu_set_object_attr(obj, k, obj2)
         elif k0 in array_class_map:
             k = camel_case_to_underscore(k0)
             cls = array_class_map[k0]
@@ -71,7 +79,7 @@ def eu_set_simple_members(obj, data: dict, commit: bool = True, verbose: bool = 
                 kwargs2 = {}
                 kwargs2[k] = obj2
                 for k2, v2 in kwargs.items():
-                    setattr(obj2, k2, v2)
+                    eu_set_object_attr(obj2, k2, v2)
                     kwargs2[k2] = v2
                 obj2.clean()
                 obj2.save()
