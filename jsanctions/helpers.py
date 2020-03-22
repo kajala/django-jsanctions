@@ -1,3 +1,6 @@
+import re
+
+
 def xml_dict_filter_attributes(data: dict, fn) -> dict:
     if isinstance(data, dict):
         for k, v in list(data.items()):
@@ -12,7 +15,6 @@ def xml_dict_filter_attributes(data: dict, fn) -> dict:
 
 
 def camel_case_to_underscore(s: str) -> str:
-    import re
     s = re.sub(r"([A-Z]+)([A-Z][a-z])", r'\1_\2', s)
     s = re.sub(r"([a-z\d])([A-Z])", r'\1_\2', s)
     s = s.replace("-", "_")

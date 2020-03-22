@@ -9,6 +9,7 @@ from django.utils.translation import gettext_lazy as _
 from jutil.parse import parse_datetime
 from jutil.xml import xml_to_dict
 from jsanctions.helpers import xml_dict_filter_attributes
+import urllib
 
 
 logger = logging.getLogger(__name__)
@@ -50,7 +51,6 @@ class SanctionsListFileManager(models.Manager):
             return file
 
     def create_from_url(self, url: str, filename: str, **kwargs):
-        import urllib.request
         response = urllib.request.urlopen(url)
         body = response.read()
         plain_filename = os.path.basename(filename)
