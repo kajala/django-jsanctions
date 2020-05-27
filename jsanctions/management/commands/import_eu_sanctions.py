@@ -1,7 +1,9 @@
-#pylint: disable=too-many-locals,logging-format-interpolation
+# pylint: disable=too-many-locals,logging-format-interpolation
 import logging
 import os
-from django.core.management import CommandParser
+from typing import Any
+
+from django.core.management.base import CommandParser
 from django.db import transaction
 from django.utils.timezone import now
 from jutil.admin import admin_log
@@ -38,6 +40,7 @@ def eu_set_simple_members(obj, data: dict, commit: bool = True, verbose: bool = 
 
     padding_str = ' ' * padding
     obj.save()
+    obj2: Any
     for k0, v0 in data.items():
         if k0[0] == '@':
             k = camel_case_to_underscore(k0[1:])

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from distutils.core import setup
-from setuptools import find_packages
+from setuptools import find_packages  # type: ignore
 
 
 def parse_requirements(filename, session=False):
@@ -22,6 +22,6 @@ setup(
     license='MIT licence, see LICENCE.txt',
     description='Parses and imports EU combined sanction lists for Django projects',
     long_description=open('README.md').read(),
-    zip_safe=True,
+    zip_safe=False,
     install_requires=install_requires
 )

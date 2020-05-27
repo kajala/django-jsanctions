@@ -1,5 +1,7 @@
 import logging
 import os
+from typing import List
+from urllib.request import urlopen
 from django.conf import settings
 from django.core.files import File
 from django.core.files.base import ContentFile
@@ -9,7 +11,6 @@ from django.utils.translation import gettext_lazy as _
 from jutil.parse import parse_datetime
 from jutil.xml import xml_to_dict
 from jsanctions.helpers import xml_dict_filter_attributes
-import urllib
 
 
 logger = logging.getLogger(__name__)
@@ -35,7 +36,7 @@ EU_XML_ARRAY_TAGS = [
     'regulation',
     'remark',
 ]
-EU_XML_INT_TAGS = [
+EU_XML_INT_TAGS: List[str] = [
 ]
 EU_XML_DATE_ATTRIBUTES = [
     '@birthdate',
@@ -51,7 +52,7 @@ class SanctionsListFileManager(models.Manager):
             return file
 
     def create_from_url(self, url: str, filename: str, **kwargs):
-        response = urllib.request.urlopen(url)
+        response = urlopen(url)
         body = response.read()
         plain_filename = os.path.basename(filename)
         file = self.create(**kwargs)
@@ -64,11 +65,11 @@ class SanctionListObject(models.Model):
 
 
 class SanctionsListFile(SanctionListObject):
-    objects = SanctionsListFileManager()
-    created = models.DateTimeField(_('created'), default=now, blank=True, editable=False, db_index=True)
-    imported = models.DateTimeField(_('imported'), default=None, null=True, blank=True, editable=False, db_index=True)
-    generation_date = models.DateField(_('generation date'), default=None, blank=True, null=True, editable=False, db_index=True)
-    file = models.FileField(_('file'), upload_to='uploads')
+    objects = SanctionsListFileManager()  # type: ignore
+    created = models.DateTimeField(verbose_name=_('created'), default=now, blank=True, editable=False, db_index=True)
+    imported = models.DateTimeField(verbose_name=_('imported'), default=None, null=True, blank=True, editable=False, db_index=True)
+    generation_date = models.DateField(verbose_name=_('generation date'), default=None, blank=True, null=True, editable=False, db_index=True)
+    file = models.FileField(verbose_name=_('file'), upload_to='uploads')
 
     class Meta:
         verbose_name = _('sanction list')
@@ -83,8 +84,8 @@ class SanctionsListFile(SanctionListObject):
 
 
 class EuCombinedSanctionsList(SanctionsListFile):
-    objects = SanctionsListFileManager()
-    global_file_id = models.CharField(_('global file id'), **DEFAULT_DESCRIPTION_TYPE)
+    objects = SanctionsListFileManager()  # type: ignore
+    global_file_id = models.CharField(verbose_name=_('global file id'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
 
     class Meta:
         verbose_name = _('EU combined sanction list')
@@ -114,7 +115,7 @@ class EuCombinedSanctionsList(SanctionsListFile):
 
 class Remark(models.Model):
     container = models.ForeignKey(SanctionListObject, on_delete=models.CASCADE)
-    text = models.TextField(_('text'), blank=True)
+    text = models.TextField(verbose_name=_('text'), blank=True)
 
     class Meta:
         verbose_name = _('remark')
@@ -129,8 +130,8 @@ class Remark(models.Model):
 
 
 class SubjectType(SanctionListObject):
-    code = models.CharField(_('code'), **DEFAULT_DESCRIPTION_TYPE)
-    classification_code = models.CharField(_('classification code'), **DEFAULT_CODE_TYPE)
+    code = models.CharField(verbose_name=_('code'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    classification_code = models.CharField(verbose_name=_('classification code'), **DEFAULT_CODE_TYPE)  # type: ignore
 
     class Meta:
         verbose_name = _('subject type')
@@ -142,14 +143,14 @@ class SubjectType(SanctionListObject):
 
 class Regulation(SanctionListObject):
     sanction = models.ForeignKey('SanctionEntity', verbose_name=_('sanction entity'), on_delete=models.CASCADE)
-    regulation_type = models.CharField(_('regulation type'), **DEFAULT_DESCRIPTION_TYPE)
-    organisation_type = models.CharField(_('organization type'), **DEFAULT_DESCRIPTION_TYPE)
-    publication_date = models.DateField(_('publication date'), **DEFAULT_DATE_TYPE)
-    publication_url = models.URLField(_('url'), blank=True, default='')
-    entry_into_force_date = models.DateField(_('entry into force date'), **DEFAULT_DATE_TYPE)
-    number_title = models.CharField(_('number title'), **DEFAULT_DESCRIPTION_TYPE)
-    programme = models.CharField(_('programmer'), **DEFAULT_DESCRIPTION_TYPE)
-    logical_id = models.BigIntegerField(_('logical id'), blank=True, null=True, default=None)
+    regulation_type = models.CharField(verbose_name=_('regulation type'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    organisation_type = models.CharField(verbose_name=_('organization type'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    publication_date = models.DateField(verbose_name=_('publication date'), **DEFAULT_DATE_TYPE)  # type: ignore
+    publication_url = models.URLField(verbose_name=_('url'), blank=True, default='')
+    entry_into_force_date = models.DateField(verbose_name=_('entry into force date'), **DEFAULT_DATE_TYPE)  # type: ignore
+    number_title = models.CharField(verbose_name=_('number title'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    programme = models.CharField(verbose_name=_('programmer'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    logical_id = models.BigIntegerField(verbose_name=_('logical id'), blank=True, null=True, default=None)
 
     class Meta:
         verbose_name = _('regulation')
@@ -157,10 +158,10 @@ class Regulation(SanctionListObject):
 
 
 class RegulationSummary(SanctionListObject):
-    regulation_type = models.CharField(_('regulation type'), **DEFAULT_CODE_TYPE)
-    number_title = models.CharField(_('number title'), **DEFAULT_DESCRIPTION_TYPE)
-    publication_date = models.DateField(_('publication date'), **DEFAULT_DATE_TYPE)
-    publication_url = models.URLField(_('url'), blank=True, default='')
+    regulation_type = models.CharField(verbose_name=_('regulation type'), **DEFAULT_CODE_TYPE)  # type: ignore
+    number_title = models.CharField(verbose_name=_('number title'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    publication_date = models.DateField(verbose_name=_('publication date'), **DEFAULT_DATE_TYPE)  # type: ignore
+    publication_url = models.URLField(verbose_name=_('url'), blank=True, default='')
 
     class Meta:
         verbose_name = _('regulation summary')
@@ -172,16 +173,16 @@ class RegulationSummary(SanctionListObject):
 
 class NameAlias(SanctionListObject):
     sanction = models.ForeignKey('SanctionEntity', verbose_name=_('sanction entity'), on_delete=models.CASCADE)
-    first_name = models.CharField(_('first name'), **DEFAULT_DESCRIPTION_TYPE)
-    middle_name = models.CharField(_('middle name'), **DEFAULT_DESCRIPTION_TYPE)
-    last_name = models.CharField(_('last name'), **DEFAULT_DESCRIPTION_TYPE)
-    whole_name = models.CharField(_('whole name'), **DEFAULT_DESCRIPTION_TYPE)
-    name_language = models.CharField(_('name language'), **LANGUAGE_CODE_TYPE)
-    function = models.CharField(_('function'), **DEFAULT_DESCRIPTION_TYPE)
-    title = models.CharField(_('title'), **DEFAULT_DESCRIPTION_TYPE)
-    regulation_language = models.CharField(_('regulation language'), **LANGUAGE_CODE_TYPE)
-    logical_id = models.BigIntegerField(_('logical id'), blank=True, null=True, default=None)
-    regulation_summary = models.ForeignKey(RegulationSummary, **REGULATION_SUMMARY_TYPE)
+    first_name = models.CharField(verbose_name=_('first name'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    middle_name = models.CharField(verbose_name=_('middle name'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    last_name = models.CharField(verbose_name=_('last name'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    whole_name = models.CharField(verbose_name=_('whole name'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    name_language = models.CharField(verbose_name=_('name language'), **LANGUAGE_CODE_TYPE)  # type: ignore
+    function = models.CharField(verbose_name=_('function'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    title = models.CharField(verbose_name=_('title'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    regulation_language = models.CharField(verbose_name=_('regulation language'), **LANGUAGE_CODE_TYPE)  # type: ignore
+    logical_id = models.BigIntegerField(verbose_name=_('logical id'), blank=True, null=True, default=None)
+    regulation_summary = models.ForeignKey(RegulationSummary, **REGULATION_SUMMARY_TYPE)  # type: ignore
 
     class Meta:
         verbose_name = _('name alias')
@@ -197,23 +198,23 @@ class NameAlias(SanctionListObject):
 
 class Identification(SanctionListObject):
     sanction = models.ForeignKey('SanctionEntity', verbose_name=_('sanction entity'), on_delete=models.CASCADE)
-    diplomatic = models.BooleanField(_('diplomatic'), **DEFAULT_BOOLEAN_TYPE)
-    known_expired = models.BooleanField(_('known expired'), **DEFAULT_BOOLEAN_TYPE)
-    known_false = models.BooleanField(_('known false'), **DEFAULT_BOOLEAN_TYPE)
-    reported_lost = models.BooleanField(_('reported lost'), **DEFAULT_BOOLEAN_TYPE)
-    revoked_by_issuer = models.BooleanField(_('revoked by issuer'), **DEFAULT_BOOLEAN_TYPE)
-    issued_by = models.CharField(_('issued by'), **DEFAULT_DESCRIPTION_TYPE)
-    latin_number = models.CharField(_('latin number'), **DEFAULT_DESCRIPTION_TYPE)
-    name_on_document = models.CharField(_('name on document'), **DEFAULT_DESCRIPTION_TYPE)
-    number = models.CharField(_('number'), **DEFAULT_DESCRIPTION_TYPE)
-    region = models.CharField(_('region'), **DEFAULT_DESCRIPTION_TYPE)
-    country_iso2_code = models.CharField(_('issued by'), **COUNTRY_CODE_TYPE)
-    country_description = models.CharField(_('country description'), **DEFAULT_DESCRIPTION_TYPE)
-    identification_type_code = models.CharField(_('identification type code'), **DEFAULT_CODE_TYPE)
-    identification_type_description = models.CharField(_('identification type code'), **DEFAULT_DESCRIPTION_TYPE)
-    regulation_language = models.CharField(_('regional language'), **LANGUAGE_CODE_TYPE)
-    logical_id = models.BigIntegerField(_('logical id'), blank=True, null=True, default=None)
-    regulation_summary = models.ForeignKey(RegulationSummary, **REGULATION_SUMMARY_TYPE)
+    diplomatic = models.BooleanField(verbose_name=_('diplomatic'), **DEFAULT_BOOLEAN_TYPE)  # type: ignore
+    known_expired = models.BooleanField(verbose_name=_('known expired'), **DEFAULT_BOOLEAN_TYPE)  # type: ignore
+    known_false = models.BooleanField(verbose_name=_('known false'), **DEFAULT_BOOLEAN_TYPE)  # type: ignore
+    reported_lost = models.BooleanField(verbose_name=_('reported lost'), **DEFAULT_BOOLEAN_TYPE)  # type: ignore
+    revoked_by_issuer = models.BooleanField(verbose_name=_('revoked by issuer'), **DEFAULT_BOOLEAN_TYPE)  # type: ignore
+    issued_by = models.CharField(verbose_name=_('issued by'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    latin_number = models.CharField(verbose_name=_('latin number'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    name_on_document = models.CharField(verbose_name=_('name on document'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    number = models.CharField(verbose_name=_('number'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    region = models.CharField(verbose_name=_('region'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    country_iso2_code = models.CharField(verbose_name=_('issued by'), **COUNTRY_CODE_TYPE)  # type: ignore
+    country_description = models.CharField(verbose_name=_('country description'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    identification_type_code = models.CharField(verbose_name=_('identification type code'), **DEFAULT_CODE_TYPE)  # type: ignore
+    identification_type_description = models.CharField(verbose_name=_('identification type code'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    regulation_language = models.CharField(verbose_name=_('regional language'), **LANGUAGE_CODE_TYPE)  # type: ignore
+    logical_id = models.BigIntegerField(verbose_name=_('logical id'), blank=True, null=True, default=None)
+    regulation_summary = models.ForeignKey(RegulationSummary, **REGULATION_SUMMARY_TYPE)  # type: ignore
 
     class Meta:
         verbose_name = _('identification')
@@ -222,20 +223,20 @@ class Identification(SanctionListObject):
 
 class BirthDate(SanctionListObject):
     sanction = models.ForeignKey('SanctionEntity', verbose_name=_('sanction entity'), on_delete=models.CASCADE)
-    circa = models.BooleanField(_('circa'), **DEFAULT_BOOLEAN_TYPE)
-    calendar_type = models.CharField(_('calendar type'), **DEFAULT_CODE_TYPE)
-    city = models.CharField(_('city'), **DEFAULT_DESCRIPTION_TYPE)
-    zip_code = models.CharField(_('zip code'), **DEFAULT_DESCRIPTION_TYPE)
-    birth_date = models.DateField(_('birth date'), **DEFAULT_DATE_TYPE)
-    day_of_month = models.IntegerField(_('day of month'), **DEFAULT_INT_TYPE)
-    month_of_year = models.IntegerField(_('month of year'), **DEFAULT_INT_TYPE)
-    year = models.IntegerField(_('year'), **DEFAULT_INT_TYPE)
-    region = models.CharField(_('region'), **DEFAULT_DESCRIPTION_TYPE)
-    place = models.CharField(_('place'), **DEFAULT_DESCRIPTION_TYPE)
-    country_iso2_code = models.CharField(_('country'), **COUNTRY_CODE_TYPE)
-    country_description = models.CharField(_('country description'), **DEFAULT_DESCRIPTION_TYPE)
-    regulation_language = models.CharField(_('regional language'), **LANGUAGE_CODE_TYPE)
-    logical_id = models.BigIntegerField(_('logical id'), blank=True, null=True, default=None)
+    circa = models.BooleanField(verbose_name=_('circa'), **DEFAULT_BOOLEAN_TYPE)  # type: ignore
+    calendar_type = models.CharField(verbose_name=_('calendar type'), **DEFAULT_CODE_TYPE)  # type: ignore
+    city = models.CharField(verbose_name=_('city'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    zip_code = models.CharField(verbose_name=_('zip code'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    birth_date = models.DateField(verbose_name=_('birth date'), **DEFAULT_DATE_TYPE)  # type: ignore
+    day_of_month = models.IntegerField(verbose_name=_('day of month'), **DEFAULT_INT_TYPE)  # type: ignore
+    month_of_year = models.IntegerField(verbose_name=_('month of year'), **DEFAULT_INT_TYPE)  # type: ignore
+    year = models.IntegerField(verbose_name=_('year'), **DEFAULT_INT_TYPE)  # type: ignore
+    region = models.CharField(verbose_name=_('region'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    place = models.CharField(verbose_name=_('place'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    country_iso2_code = models.CharField(verbose_name=_('country'), **COUNTRY_CODE_TYPE)  # type: ignore
+    country_description = models.CharField(verbose_name=_('country description'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    regulation_language = models.CharField(verbose_name=_('regional language'), **LANGUAGE_CODE_TYPE)  # type: ignore
+    logical_id = models.BigIntegerField(verbose_name=_('logical id'), blank=True, null=True, default=None)
 
     class Meta:
         verbose_name = _('birth date')
@@ -244,12 +245,12 @@ class BirthDate(SanctionListObject):
 
 class Citizenship(SanctionListObject):
     sanction = models.ForeignKey('SanctionEntity', verbose_name=_('sanction entity'), on_delete=models.CASCADE)
-    region = models.CharField(_('region'), **DEFAULT_DESCRIPTION_TYPE)
-    country_iso2_code = models.CharField(_('country'), **COUNTRY_CODE_TYPE)
-    country_description = models.CharField(_('country description'), **DEFAULT_DESCRIPTION_TYPE)
-    regulation_language = models.CharField(_('regional language'), **LANGUAGE_CODE_TYPE)
-    logical_id = models.BigIntegerField(_('logical id'), blank=True, null=True, default=None)
-    regulation_summary = models.ForeignKey(RegulationSummary, **REGULATION_SUMMARY_TYPE)
+    region = models.CharField(verbose_name=_('region'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    country_iso2_code = models.CharField(verbose_name=_('country'), **COUNTRY_CODE_TYPE)  # type: ignore
+    country_description = models.CharField(verbose_name=_('country description'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    regulation_language = models.CharField(verbose_name=_('regional language'), **LANGUAGE_CODE_TYPE)  # type: ignore
+    logical_id = models.BigIntegerField(verbose_name=_('logical id'), blank=True, null=True, default=None)
+    regulation_summary = models.ForeignKey(RegulationSummary, **REGULATION_SUMMARY_TYPE)  # type: ignore
 
     class Meta:
         verbose_name = _('citizenship')
@@ -258,18 +259,18 @@ class Citizenship(SanctionListObject):
 
 class Address(SanctionListObject):
     sanction = models.ForeignKey('SanctionEntity', verbose_name=_('sanction entity'), on_delete=models.CASCADE)
-    city = models.CharField(_('city'), **DEFAULT_DESCRIPTION_TYPE)
-    street = models.CharField(_('street'), **DEFAULT_DESCRIPTION_TYPE)
-    po_box = models.CharField(_('p.o. box'), **DEFAULT_DESCRIPTION_TYPE)
-    zip_code = models.CharField(_('zip code'), **DEFAULT_DESCRIPTION_TYPE)
-    as_at_listing_time = models.BooleanField(_('as at listing time'), **DEFAULT_BOOLEAN_TYPE)
-    place = models.CharField(_('place'), **DEFAULT_DESCRIPTION_TYPE)
-    region = models.CharField(_('region'), **DEFAULT_DESCRIPTION_TYPE)
-    country_iso2_code = models.CharField(_('country'), **COUNTRY_CODE_TYPE)
-    country_description = models.CharField(_('country description'), **DEFAULT_DESCRIPTION_TYPE)
-    regulation_language = models.CharField(_('regional language'), **LANGUAGE_CODE_TYPE)
-    logical_id = models.BigIntegerField(_('logical id'), blank=True, null=True, default=None)
-    regulation_summary = models.ForeignKey(RegulationSummary, **REGULATION_SUMMARY_TYPE)
+    city = models.CharField(verbose_name=_('city'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    street = models.CharField(verbose_name=_('street'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    po_box = models.CharField(verbose_name=_('p.o. box'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    zip_code = models.CharField(verbose_name=_('zip code'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    as_at_listing_time = models.BooleanField(_('as at listing time'), **DEFAULT_BOOLEAN_TYPE)  # type: ignore
+    place = models.CharField(verbose_name=_('place'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    region = models.CharField(verbose_name=_('region'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    country_iso2_code = models.CharField(verbose_name=_('country'), **COUNTRY_CODE_TYPE)  # type: ignore
+    country_description = models.CharField(verbose_name=_('country description'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    regulation_language = models.CharField(verbose_name=_('regional language'), **LANGUAGE_CODE_TYPE)  # type: ignore
+    logical_id = models.BigIntegerField(verbose_name=_('logical id'), blank=True, null=True, default=None)
+    regulation_summary = models.ForeignKey(RegulationSummary, **REGULATION_SUMMARY_TYPE)  # type: ignore
 
     class Meta:
         verbose_name = _('address')
@@ -278,10 +279,10 @@ class Address(SanctionListObject):
 
 class SanctionEntity(SanctionListObject):
     source = models.ForeignKey(EuCombinedSanctionsList, verbose_name=_('source'), on_delete=models.CASCADE)
-    designation_details = models.CharField(_('designation details'), **DEFAULT_DESCRIPTION_TYPE)
-    united_nation_id = models.CharField(_('United Nation identifier'), **DEFAULT_DESCRIPTION_TYPE)
-    eu_reference_number = models.CharField(_('EU reference number'), **DEFAULT_DESCRIPTION_TYPE)
-    logical_id = models.BigIntegerField(_('logical id'), blank=True, null=True, default=None)
+    designation_details = models.CharField(verbose_name=_('designation details'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    united_nation_id = models.CharField(verbose_name=_('United Nation identifier'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    eu_reference_number = models.CharField(verbose_name=_('EU reference number'), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    logical_id = models.BigIntegerField(verbose_name=_('logical id'), blank=True, null=True, default=None)
     subject_type = models.ForeignKey(SubjectType, verbose_name=_('subject type'), on_delete=models.PROTECT, null=True, default=None, blank=True)
 
     class Meta:

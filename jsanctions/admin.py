@@ -1,3 +1,4 @@
+from typing import Sequence
 from django.contrib import admin
 from django.contrib import messages
 from django.utils.timezone import now
@@ -81,7 +82,7 @@ class RemarkInlineAdmin(admin.TabularInline):
 
 
 class SanctionEntitySubFieldAdminBase(SanctionsListAdminBase):
-    raw_id_fields = (
+    raw_id_fields: Sequence[str] = (
         'sanction',
     )
 
@@ -395,12 +396,12 @@ class SanctionEntityAdmin(SanctionsListAdminBase):
         assert isinstance(obj, SanctionEntity)
         all_names = ', '.join([e.whole_name for e in obj.namealias_set.all()])
         return all_names
-    name_aliases.short_description = _('name aliases')
+    name_aliases.short_description = _('name aliases')  # type: ignore
 
     def birth_year(self, obj) -> str:
         assert isinstance(obj, SanctionEntity)
         return ', '.join([str(e.year) for e in obj.birthdate_set.all().distinct('year')])
-    birth_year.short_description = _('birth year')
+    birth_year.short_description = _('birth year')  # type: ignore
 
 
 admin.site.register(EuCombinedSanctionsList, EuCombinedSanctionsListAdmin)
