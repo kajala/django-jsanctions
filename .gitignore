@@ -11,4 +11,5 @@ __pycache__
 /*.gz
 /*.egg-info
 /.pytype
+/.mypy_cache
 

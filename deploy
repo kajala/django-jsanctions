@@ -13,7 +13,12 @@ FILE="$PROJECT-$REL"
 echo $FILE
 cd dist
 tar xvf "$FILE.tar.gz"
+rm -f "$FILE/.covera*"
+rm -f "$FILE/coverage.xml"
+rm -rf "$FIR/.mypy_cache"
 rm -rf "$FILE/venv"
+rm -rf "$FILE/data"
+rm -rf "$FILE/linecalc.conf"
 find . -name "__pycache__" -type d -exec rm -r "{}" \;
 rm "$FILE.tar.gz"
 tar zcvf "$FILE.tar.gz" $FILE
@@ -21,3 +26,4 @@ rm -rf $FILE
 cd ..
 
 twine upload dist/$FILE.tar.gz
+
