@@ -19,6 +19,8 @@ rm -rf "$FIR/.mypy_cache"
 rm -rf "$FILE/venv"
 rm -rf "$FILE/data"
 rm -rf "$FILE/linecalc.conf"
+rm -rf "$FILE/uploads"
+rm -rf "$FILE/.idea"
 find . -name "__pycache__" -type d -exec rm -r "{}" \;
 rm "$FILE.tar.gz"
 tar zcvf "$FILE.tar.gz" $FILE
