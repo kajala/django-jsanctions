@@ -1,6 +1,5 @@
 #!/bin/bash
 
 source venv/bin/activate
-pip install coverage
 coverage run --source='.' --omit='*/venv/*' manage.py test
-coverage report
+coverage report --skip-empty --skip-covered $*
