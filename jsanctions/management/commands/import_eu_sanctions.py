@@ -2,16 +2,14 @@
 import logging
 import os
 from typing import Any
-
 from django.core.management.base import CommandParser
 from django.db import transaction
 from django.utils.timezone import now
 from jutil.admin import admin_log
 from jutil.command import SafeCommand
-from jsanctions.helpers import camel_case_to_underscore
 from jsanctions.models import EuCombinedSanctionsList, SanctionEntity, RegulationSummary, BirthDate, Identification, \
     Remark, Address, Citizenship, NameAlias, Regulation, SubjectType
-
+from jutil.format import camel_case_to_underscore
 
 logger = logging.getLogger(__name__)
 

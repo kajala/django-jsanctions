@@ -1,6 +1,6 @@
 import logging
 import os
-from typing import List
+from typing import List, Dict, Any
 from urllib.request import urlopen
 from django.conf import settings
 from django.core.files import File
@@ -10,7 +10,7 @@ from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from jutil.parse import parse_datetime
 from jutil.xml import xml_to_dict
-from jsanctions.helpers import xml_dict_filter_attributes
+from jsanctions.helpers import dict_filter_attributes
 
 
 logger = logging.getLogger(__name__)
@@ -94,11 +94,12 @@ class EuCombinedSanctionsList(SanctionsListFile):
     def __str__(self):
         return '{}'.format(os.path.basename(self.file.name))
 
-    def load_xml_as_dict(self) -> dict:
+    def load_xml_as_dict(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
         with open(self.full_path, 'rb') as fp:
             data = xml_to_dict(fp.read(), array_tags=EU_XML_ARRAY_TAGS, int_tags=EU_XML_INT_TAGS)
-            data = xml_dict_filter_attributes(data, self._xml_filter_attributes)
-            return data
+            data = dict_filter_attributes(data, self._xml_filter_attributes)
+        return data
 
     @staticmethod
     def _xml_filter_attributes(k, v):
