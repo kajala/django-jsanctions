@@ -5,6 +5,7 @@ from urllib.request import urlopen
 from django.conf import settings
 from django.core.files import File
 from django.core.files.base import ContentFile
+from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
@@ -69,7 +70,7 @@ class SanctionsListFile(SanctionListObject):
     created = models.DateTimeField(verbose_name=_('created'), default=now, blank=True, editable=False, db_index=True)
     imported = models.DateTimeField(verbose_name=_('imported'), default=None, null=True, blank=True, editable=False, db_index=True)
     generation_date = models.DateField(verbose_name=_('generation date'), default=None, blank=True, null=True, editable=False, db_index=True)
-    file = models.FileField(verbose_name=_('file'), upload_to='uploads')
+    file = models.FileField(verbose_name=_('file'), upload_to='uploads', validators=[FileExtensionValidator(['xml'])])
 
     class Meta:
         verbose_name = _('sanction list')
