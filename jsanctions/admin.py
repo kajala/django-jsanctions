@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib import messages
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
-from jutil.admin import ModelAdminBase, AdminFileDownloadMixin
+from jutil.admin import ModelAdminBase
 from jsanctions.models import EuCombinedSanctionsList, SubjectType, Regulation, RegulationSummary, \
     Remark, NameAlias, SanctionEntity, BirthDate, Identification, Citizenship, Address
 
@@ -20,7 +20,7 @@ class SubjectTypeAdmin(SanctionsListAdminBase):
     )
 
 
-class SanctionsListAdmin(ModelAdminBase, AdminFileDownloadMixin):
+class SanctionsListAdmin(ModelAdminBase):
     save_on_top = False
 
     list_display = [
@@ -47,9 +47,6 @@ class SanctionsListAdmin(ModelAdminBase, AdminFileDownloadMixin):
     )
 
     date_hierarchy = 'created'
-
-    def get_urls(self):
-        return self.get_download_urls() + super().get_urls()
 
 
 class EuCombinedSanctionsListAdmin(SanctionsListAdmin):
