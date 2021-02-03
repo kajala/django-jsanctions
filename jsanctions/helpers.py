@@ -8,7 +8,7 @@ def dict_filter_attributes(data: Dict[str, Any], fn) -> Dict[str, Any]:
                 v = dict_filter_attributes(v, fn)
             elif isinstance(v, list):
                 v = [dict_filter_attributes(e, fn) for e in v]
-            elif k.startswith('@') and len(k) > 1 and isinstance(v, str):
+            elif k.startswith("@") and len(k) > 1 and isinstance(v, str):
                 v = fn(k, v)
             data[k] = v
     return data

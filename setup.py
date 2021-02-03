@@ -9,19 +9,19 @@ def parse_requirements(filename, session=False):
     return [line for line in lineiter if line and not line.startswith("#")]
 
 
-install_requires = parse_requirements('requirements.txt', session=False)
+install_requires = parse_requirements("requirements.txt", session=False)
 
 setup(
-    name='django-jsanctions',
-    version='3.3.5',
-    author=u'Jani Kajala',
-    author_email='kajala@gmail.com',
-    packages=find_packages(exclude=['project', 'venv']),
+    name="django-jsanctions",
+    version="3.4.0",
+    author=u"Jani Kajala",
+    author_email="kajala@gmail.com",
+    packages=find_packages(exclude=["project", "venv"]),
     include_package_data=True,
-    url='https://github.com/kajala/django-jsanctions',
-    license='MIT licence, see LICENCE.txt',
-    description='Parses and imports EU combined sanction lists for Django projects',
-    long_description=open('README.md').read(),
+    url="https://github.com/kajala/django-jsanctions",
+    license="MIT licence, see LICENCE.txt",
+    description="Parses and imports EU combined sanction lists for Django projects",
+    long_description=open("README.md").read(),
     zip_safe=False,
-    install_requires=install_requires
+    install_requires=install_requires,
 )

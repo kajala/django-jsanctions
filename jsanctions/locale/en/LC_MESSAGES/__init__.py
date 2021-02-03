@@ -1,1 +1,1 @@
-default_app_config = 'jsanctions.apps.JsanctionsConfig'
+default_app_config = "jsanctions.apps.JsanctionsConfig"

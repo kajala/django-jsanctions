@@ -7,13 +7,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('jsanctions', '0002_auto_20200226_0348'),
+        ("jsanctions", "0002_auto_20200226_0348"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='sanctionslistfile',
-            name='file',
-            field=models.FileField(upload_to='uploads', validators=[django.core.validators.FileExtensionValidator(['xml'])], verbose_name='file'),
+            model_name="sanctionslistfile",
+            name="file",
+            field=models.FileField(
+                upload_to="uploads",
+                validators=[django.core.validators.FileExtensionValidator(["xml"])],
+                verbose_name="file",
+            ),
         ),
     ]
