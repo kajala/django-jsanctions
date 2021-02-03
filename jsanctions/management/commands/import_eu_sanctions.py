@@ -36,9 +36,9 @@ def eu_set_object_attr(obj, k: str, v, max_length: int = 512):
     setattr(obj, k, v)
 
 
-def eu_set_simple_members(
+def eu_set_simple_members(  # noqa
     obj, data: dict, commit: bool = True, verbose: bool = True, padding: int = 0, **kwargs
-):  # noqa
+):
     class_map = {
         "regulationSummary": RegulationSummary,
         "subjectType": SubjectType,
