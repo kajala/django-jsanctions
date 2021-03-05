@@ -74,6 +74,7 @@ class SanctionsListFile(SanctionListObject):
         verbose_name=_("generation date"), default=None, blank=True, null=True, editable=False, db_index=True
     )
     file = models.FileField(verbose_name=_("file"), upload_to="uploads", validators=[FileExtensionValidator(["xml"])])
+    list_type = SafeCharField(verbose_name=_("list type"), max_length=128, db_index=True)
     global_file_id = SafeCharField(verbose_name=_("global file id"), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
 
     class Meta:

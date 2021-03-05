@@ -25,6 +25,8 @@ from jutil.format import camel_case_to_underscore
 
 logger = logging.getLogger(__name__)
 
+EU_LIST_TYPE = "EU-Combined"
+
 EU_XML_ARRAY_TAGS = [
     "sanctionEntity",
     "nameAlias",
@@ -64,7 +66,7 @@ def load_eu_combined_sanction_list_as_dict(filename: str) -> Dict[str, Any]:
 
 def eu_set_object_attr(obj, k: str, v, max_length: int = 512):
     if v and isinstance(v, str) and len(v) > max_length:
-        logger.warning("%s value truncated to [:%s]", k, max_length)
+        logger.warning("'%s' truncated to [%s]: '%s...'", k, max_length, v[:64])
         v = v[: max_length - 3] + "..."
     setattr(obj, k, v)
 
