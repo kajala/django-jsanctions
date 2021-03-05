@@ -1,20 +1,14 @@
 import logging
 import os
-from typing import List, Dict, Any
 from urllib.request import urlopen
-from django.conf import settings
 from django.core.files import File
 from django.core.files.base import ContentFile
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
-
+from jutil.format import is_media_full_path, strip_media_root, get_media_full_path
 from jutil.modelfields import SafeCharField, SafeTextField
-from jutil.parse import parse_datetime
-from jutil.xml import xml_to_dict
-from jsanctions.helpers import dict_filter_attributes
-
 
 logger = logging.getLogger(__name__)
 
@@ -41,29 +35,21 @@ REGULATION_SUMMARY_TYPE = {
     "null": True,
     "on_delete": models.PROTECT,
 }
-EU_XML_ARRAY_TAGS = [
-    "sanctionEntity",
-    "nameAlias",
-    "identification",
-    "address",
-    "birthdate",
-    "citizenship",
-    "regulation",
-    "remark",
-]
-EU_XML_INT_TAGS: List[str] = []
-EU_XML_DATE_ATTRIBUTES = [
-    "@birthdate",
-]
 
 
 class SanctionsListFileManager(models.Manager):
     def create_from_filename(self, filename: str, **kwargs):
-        with open(filename, "rb") as fp:
-            plain_filename = os.path.basename(filename)
-            file = self.create(**kwargs)
-            file.file.save(plain_filename, File(fp))
-            return file
+        full_path = os.path.realpath(filename)
+        file = self.create(**kwargs)
+        assert isinstance(file, SanctionsListFile)
+        if is_media_full_path(full_path):
+            file.file.name = strip_media_root(full_path)
+            file.save()
+        else:
+            with open(full_path, "rb") as fp:
+                plain_filename = os.path.basename(filename)
+                file.file.save(plain_filename, File(fp))
+        return file
 
     def create_from_url(self, url: str, filename: str, **kwargs):
         response = urlopen(url)
@@ -88,6 +74,7 @@ class SanctionsListFile(SanctionListObject):
         verbose_name=_("generation date"), default=None, blank=True, null=True, editable=False, db_index=True
     )
     file = models.FileField(verbose_name=_("file"), upload_to="uploads", validators=[FileExtensionValidator(["xml"])])
+    global_file_id = SafeCharField(verbose_name=_("global file id"), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
 
     class Meta:
         verbose_name = _("sanction list")
@@ -97,39 +84,8 @@ class SanctionsListFile(SanctionListObject):
         return "{}".format(os.path.basename(self.file.name))
 
     @property
-    def full_path(self):
-        return os.path.join(settings.MEDIA_ROOT, self.file.name)
-
-
-class EuCombinedSanctionsList(SanctionsListFile):
-    objects = SanctionsListFileManager()  # type: ignore
-    global_file_id = SafeCharField(verbose_name=_("global file id"), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
-
-    class Meta:
-        verbose_name = _("EU combined sanction list")
-        verbose_name_plural = _("EU combined sanction lists")
-
-    def __str__(self):
-        return "{}".format(os.path.basename(self.file.name))
-
-    def load_xml_as_dict(self) -> Dict[str, Any]:
-        data: Dict[str, Any] = {}
-        with open(self.full_path, "rb") as fp:
-            data = xml_to_dict(fp.read(), array_tags=EU_XML_ARRAY_TAGS, int_tags=EU_XML_INT_TAGS)
-            data = dict_filter_attributes(data, self._xml_filter_attributes)
-        return data
-
-    @staticmethod
-    def _xml_filter_attributes(k, v):
-        if k.endswith("Date") or k in EU_XML_DATE_ATTRIBUTES:
-            return parse_datetime(v).date()
-        if k == "@logicalId":
-            return int(v)
-        if v == "false":
-            return False
-        if v == "true":
-            return True
-        return v
+    def full_path(self) -> str:
+        return get_media_full_path(self.file.name)
 
 
 class Remark(models.Model):
@@ -297,7 +253,7 @@ class Address(SanctionListObject):
 
 
 class SanctionEntity(SanctionListObject):
-    source = models.ForeignKey(EuCombinedSanctionsList, verbose_name=_("source"), on_delete=models.CASCADE)
+    source = models.ForeignKey(SanctionsListFile, verbose_name=_("source"), on_delete=models.CASCADE)
     designation_details = SafeCharField(verbose_name=_("designation details"), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
     united_nation_id = SafeCharField(verbose_name=_("United Nation identifier"), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
     eu_reference_number = SafeCharField(verbose_name=_("EU reference number"), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore

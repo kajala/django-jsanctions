@@ -5,7 +5,6 @@ from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from jutil.admin import ModelAdminBase
 from jsanctions.models import (
-    EuCombinedSanctionsList,
     SubjectType,
     Regulation,
     RegulationSummary,
@@ -16,6 +15,7 @@ from jsanctions.models import (
     Identification,
     Citizenship,
     Address,
+    SanctionsListFile,
 )
 
 
@@ -59,7 +59,7 @@ class SanctionsListAdmin(ModelAdminBase):
     date_hierarchy = "created"
 
 
-class EuCombinedSanctionsListAdmin(SanctionsListAdmin):
+class SanctionsListFileAdmin(SanctionsListAdmin):
     fields = SanctionsListAdmin.fields + [
         "global_file_id",
     ]
@@ -399,7 +399,7 @@ class SanctionEntityAdmin(SanctionsListAdminBase):
     birth_year.short_description = _("birth year")  # type: ignore
 
 
-admin.site.register(EuCombinedSanctionsList, EuCombinedSanctionsListAdmin)
+admin.site.register(SanctionsListFile, SanctionsListFileAdmin)
 admin.site.register(SubjectType, SubjectTypeAdmin)
 admin.site.register(RegulationSummary, RegulationSummaryAdmin)
 admin.site.register(SanctionEntity, SanctionEntityAdmin)
