@@ -22,7 +22,7 @@ class Command(SafeCommand):
         parser.add_argument("--new", action="store_true")
         parser.add_argument("--verbose", action="store_true")
 
-    def do(self, *args, **options):
+    def do(self, *args, **options):  # pylint: disable=too-many-branches
         verbose = options["verbose"]
         source: Optional[SanctionsListFile] = None
         if options["url"]:
