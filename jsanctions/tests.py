@@ -1,7 +1,7 @@
 import os
 from django.conf import settings
 from django.test import TestCase
-from jsanctions.management.commands.import_eu_sanctions import import_eu_combined_sanctions_list
+from jsanctions.eu_combined import import_eu_combined_sanctions_list
 from jsanctions.models import SanctionEntity, SanctionsListFile
 
 
