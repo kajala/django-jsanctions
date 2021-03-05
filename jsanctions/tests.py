@@ -7,7 +7,6 @@ from jsanctions.models import SanctionEntity, SanctionsListFile
 
 class Tests(TestCase):
     def test_eu_combined_sanctions_list_import(self):
-        print("test_eu_sanctions_import")
         filename = os.path.join(settings.BASE_DIR, "data/eu-combined/2021-03-05.xml")
         source = SanctionsListFile.objects.create_from_filename(filename)
         assert isinstance(source, SanctionsListFile)
