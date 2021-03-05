@@ -42,7 +42,7 @@ class Command(SafeCommand):
         import_eu_combined_sanctions_list(source, verbose=verbose)
 
         if options["delete_old"]:
-            for e in SanctionsListFile.objects.all().filters(list_type=EU_LIST_TYPE).exclude(id=source.id):
+            for e in SanctionsListFile.objects.all().filter(list_type=EU_LIST_TYPE).exclude(id=source.id):
                 assert isinstance(e, SanctionsListFile)
                 logger.info("Deleting %s", e)
                 if os.path.isfile(e.full_path):
