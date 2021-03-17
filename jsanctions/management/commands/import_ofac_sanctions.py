@@ -32,7 +32,7 @@ class Command(SafeCommand):
             filename = (
                 options["file"]
                 if options["file"]
-                else "OFAC-{}-{}.xml".format(os.path.basename(url)[:-4], now().date().isoformat())
+                else "{}-{}-{}.xml".format(list_type, os.path.basename(url)[:-4], now().date().isoformat())
             )
             source = SanctionsListFile.objects.create_from_url(url, filename, list_type=list_type)
         elif options["file"]:
@@ -48,7 +48,7 @@ class Command(SafeCommand):
                 "https://www.treasury.gov/ofac/downloads/sdn.xml",
             ]
             for url in urls:
-                filename = "OFAC-{}-{}.xml".format(os.path.basename(url)[:-4], now().date().isoformat())
+                filename = "{}-{}-{}.xml".format(list_type, os.path.basename(url)[:-4], now().date().isoformat())
                 source = SanctionsListFile.objects.create_from_url(url, filename, list_type=list_type)
                 sources.append(source)
         if not sources:
