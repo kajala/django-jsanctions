@@ -1,6 +1,12 @@
+import json
+import traceback
 from typing import Sequence
+from django.conf.urls import url
 from django.contrib import admin
 from django.contrib import messages
+from django.urls import ResolverMatch, reverse
+from django.utils.html import format_html
+from django.utils.safestring import mark_safe
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from jutil.admin import ModelAdminBase
@@ -21,6 +27,7 @@ from jsanctions.models import (
 
 class SanctionsListAdminBase(ModelAdminBase):
     exclude = ()
+    save_on_top = False
 
 
 class SubjectTypeAdmin(SanctionsListAdminBase):
@@ -31,42 +38,52 @@ class SubjectTypeAdmin(SanctionsListAdminBase):
     )
 
 
-class SanctionsListAdmin(ModelAdminBase):
+class SanctionsListFileAdmin(ModelAdminBase):
     save_on_top = False
 
     list_display = [
         "created",
         "generation_date",
-        "file",
         "imported",
+        "file",
+        "list_type",
+        "entities",
     ]
 
     fields = [
         "created",
         "generation_date",
-        "file",
         "imported",
+        "file",
+        "list_type",
+        "entities",
     ]
 
     readonly_fields = [
         "created",
         "generation_date",
         "imported",
+        "list_type",
+        "entities",
     ]
 
     raw_id_fields = ()
 
+    list_filter = [
+        "list_type",
+    ]
+
     date_hierarchy = "created"
 
+    def entities(self, obj):
+        assert isinstance(obj, SanctionsListFile)
+        return format_html(
+            '<a href="{}">{}</a>',
+            reverse("admin:jsanctions_sanctionentity_source_changelist", args=[obj.id]),
+            obj.sanctionentity_set.count(),
+        )
 
-class SanctionsListFileAdmin(SanctionsListAdmin):
-    fields = SanctionsListAdmin.fields + [
-        "global_file_id",
-    ]
-
-    readonly_fields = SanctionsListAdmin.readonly_fields + [
-        "global_file_id",
-    ]
+    entities.short_description = _("sanction entities")  # type: ignore
 
 
 class RemarkAdmin(SanctionsListAdminBase):
@@ -384,11 +401,31 @@ class SanctionEntityAdmin(SanctionsListAdminBase):
         AddressCountryFilter,
         CitizenshipCountryFilter,
     )
+    fields = [
+        "source",
+        "designation_details",
+        "united_nation_id",
+        "eu_reference_number",
+        "logical_id",
+        "subject_type",
+        "data_fmt",
+    ]
+    readonly_fields = [
+        "data_fmt",
+    ]
+
+    def data_fmt(self, obj) -> str:
+        try:
+            return mark_safe("<pre>" + json.dumps(obj.data, indent=4, sort_keys=True) + "</pre>")
+        except Exception:
+            return mark_safe("<pre>" + traceback.format_exc() + "</pre>")
+
+    data_fmt.short_description = _("data")  # type: ignore
 
     def name_aliases(self, obj) -> str:
         assert isinstance(obj, SanctionEntity)
         all_names = ", ".join([e.whole_name for e in obj.namealias_set.all()])
-        return all_names
+        return all_names if len(all_names) < 64 else all_names[:64] + "..."
 
     name_aliases.short_description = _("name aliases")  # type: ignore
 
@@ -398,15 +435,27 @@ class SanctionEntityAdmin(SanctionsListAdminBase):
 
     birth_year.short_description = _("birth year")  # type: ignore
 
+    def get_queryset(self, request):
+        rm = request.resolver_match
+        assert isinstance(rm, ResolverMatch)
+        qs = super().get_queryset(request)
+        source_id = rm.kwargs.get("source_id", None)
+        if source_id:
+            qs = qs.filter(source_id=source_id)
+        return qs
+
+    def get_urls(self):
+        info = self.model._meta.app_label, self.model._meta.model_name  # type: ignore  # noqa
+        return [
+            url(
+                r"^by-source/(?P<source_id>\d+)/$",
+                self.admin_site.admin_view(self.kw_changelist_view),
+                name="%s_%s_source_changelist" % info,
+            ),
+        ] + super().get_urls()
+
 
 admin.site.register(SanctionsListFile, SanctionsListFileAdmin)
 admin.site.register(SubjectType, SubjectTypeAdmin)
 admin.site.register(RegulationSummary, RegulationSummaryAdmin)
 admin.site.register(SanctionEntity, SanctionEntityAdmin)
-# admin.site.register(Regulation, SanctionEntitySubFieldAdminBase)
-# admin.site.register(Remark, RemarkAdmin)
-# admin.site.register(BirthDate, BirthDateAdmin)
-# admin.site.register(Citizenship, CitizenshipAdmin)
-# admin.site.register(NameAlias, NameAliasAdmin)
-# admin.site.register(Identification, IdentificationAdmin)
-# admin.site.register(Address, AddressAdmin)

@@ -3,12 +3,15 @@ import os
 from urllib.request import urlopen
 from django.core.files import File
 from django.core.files.base import ContentFile
+from django.core.serializers.json import DjangoJSONEncoder
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from jutil.format import is_media_full_path, strip_media_root, get_media_full_path
 from jutil.modelfields import SafeCharField, SafeTextField
+
+from jsanctions.helpers import get_country_iso2_code
 
 logger = logging.getLogger(__name__)
 
@@ -45,10 +48,12 @@ class SanctionsListFileManager(models.Manager):
         if is_media_full_path(full_path):
             file.file.name = strip_media_root(full_path)
             file.save()
+            logger.info("%s used as is", file.file)
         else:
             with open(full_path, "rb") as fp:
                 plain_filename = os.path.basename(filename)
                 file.file.save(plain_filename, File(fp))
+            logger.info("%s written", file.file)
         return file
 
     def create_from_url(self, url: str, filename: str, **kwargs):
@@ -57,6 +62,7 @@ class SanctionsListFileManager(models.Manager):
         plain_filename = os.path.basename(filename)
         file = self.create(**kwargs)
         file.file.save(plain_filename, ContentFile(body))
+        logger.info("%s written", file.file)
         return file
 
 
@@ -106,8 +112,19 @@ class Remark(models.Model):
 
 
 class SubjectType(SanctionListObject):
-    code = SafeCharField(verbose_name=_("code"), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
+    PERSON = "P"
+    ENTERPRISE = "E"
+    VESSEL = "V"
+    AIRCRAFT = "A"
+    CLASSIFICATION_CODES = [
+        (PERSON, _("person")),
+        (ENTERPRISE, _("enterprise")),
+        (VESSEL, _("vessel")),
+        (AIRCRAFT, _("aircraft")),
+    ]
+
     classification_code = SafeCharField(verbose_name=_("classification code"), **DEFAULT_CODE_TYPE)  # type: ignore
+    code = SafeCharField(verbose_name=_("code"), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
 
     class Meta:
         verbose_name = _("subject type")
@@ -170,6 +187,8 @@ class NameAlias(SanctionListObject):
     def clean(self):
         if len(self.function) > 256:
             self.function = self.function[:256]
+        if not self.whole_name:
+            self.whole_name = (self.first_name + " " + self.last_name).strip()
 
 
 class Identification(SanctionListObject):
@@ -179,6 +198,7 @@ class Identification(SanctionListObject):
     known_false = models.BooleanField(verbose_name=_("known false"), **DEFAULT_BOOLEAN_TYPE)  # type: ignore
     reported_lost = models.BooleanField(verbose_name=_("reported lost"), **DEFAULT_BOOLEAN_TYPE)  # type: ignore
     revoked_by_issuer = models.BooleanField(verbose_name=_("revoked by issuer"), **DEFAULT_BOOLEAN_TYPE)  # type: ignore
+    issue_date = models.DateField(verbose_name=_("issue date"), **DEFAULT_DATE_TYPE)  # type: ignore
     issued_by = SafeCharField(verbose_name=_("issued by"), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
     latin_number = SafeCharField(verbose_name=_("latin number"), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
     name_on_document = SafeCharField(verbose_name=_("name on document"), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
@@ -196,6 +216,10 @@ class Identification(SanctionListObject):
         verbose_name = _("identification")
         verbose_name_plural = _("identifications")
 
+    def clean(self):
+        if self.country_description and not self.country_iso2_code:
+            self.country_iso2_code = get_country_iso2_code(self.country_description)
+
 
 class BirthDate(SanctionListObject):
     sanction = models.ForeignKey("SanctionEntity", verbose_name=_("sanction entity"), on_delete=models.CASCADE)
@@ -204,6 +228,7 @@ class BirthDate(SanctionListObject):
     city = SafeCharField(verbose_name=_("city"), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
     zip_code = SafeCharField(verbose_name=_("zip code"), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
     birth_date = models.DateField(verbose_name=_("birth date"), **DEFAULT_DATE_TYPE)  # type: ignore
+    birth_date_description = SafeCharField(verbose_name=_("zip code"), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
     day_of_month = models.IntegerField(verbose_name=_("day of month"), **DEFAULT_INT_TYPE)  # type: ignore
     month_of_year = models.IntegerField(verbose_name=_("month of year"), **DEFAULT_INT_TYPE)  # type: ignore
     year = models.IntegerField(verbose_name=_("year"), **DEFAULT_INT_TYPE)  # type: ignore
@@ -252,6 +277,10 @@ class Address(SanctionListObject):
         verbose_name = _("address")
         verbose_name_plural = _("addresses")
 
+    def clean(self):
+        if self.country_description and not self.country_iso2_code:
+            self.country_iso2_code = get_country_iso2_code(self.country_description)
+
 
 class SanctionEntity(SanctionListObject):
     source = models.ForeignKey(SanctionsListFile, verbose_name=_("source"), on_delete=models.CASCADE)
@@ -262,6 +291,7 @@ class SanctionEntity(SanctionListObject):
     subject_type = models.ForeignKey(
         SubjectType, verbose_name=_("subject type"), on_delete=models.PROTECT, null=True, default=None, blank=True
     )
+    data = models.JSONField(_("data"), default=dict, blank=True, encoder=DjangoJSONEncoder)  # type: ignore
 
     class Meta:
         verbose_name = _("sanction entity")
