@@ -1,7 +1,7 @@
 import logging
 import os
 from typing import List
-from jsanctions.models import SanctionsListFile
+from jsanctions.models import SanctionsListFile, SanctionEntity
 
 logger = logging.getLogger(__name__)
 
@@ -15,4 +15,5 @@ def delete_old_sanction_list_files(list_type: str, exclude: List[SanctionsListFi
         if os.path.isfile(e.full_path) and not any([ex.full_path == e.full_path for ex in exclude]):
             os.unlink(e.full_path)
             logger.info("%s deleted", e.full_path)
+        SanctionEntity.objects.all().filter(source=e).delete()
         e.delete()
