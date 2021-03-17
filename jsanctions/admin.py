@@ -63,7 +63,6 @@ class SanctionsListFileAdmin(ModelAdminBase):
         "created",
         "generation_date",
         "imported",
-        "list_type",
         "entities",
     ]
 
@@ -77,6 +76,8 @@ class SanctionsListFileAdmin(ModelAdminBase):
 
     def entities(self, obj):
         assert isinstance(obj, SanctionsListFile)
+        if not obj.id:
+            return ""
         return format_html(
             '<a href="{}">{}</a>',
             reverse("admin:jsanctions_sanctionentity_source_changelist", args=[obj.id]),
