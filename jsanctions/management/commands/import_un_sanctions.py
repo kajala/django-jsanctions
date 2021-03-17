@@ -41,16 +41,11 @@ class Command(SafeCommand):
             source = SanctionsListFile.objects.get(id=options["source"])
         elif options["new"]:
             source = SanctionsListFile.objects.filter(imported=None).order_by("id").first()
-        sources = [source] if source else []
         if options["url_defaults"]:
-            urls = [
-                "https://scsanctions.un.org/resources/xml/en/consolidated.xml",
-            ]
-            for url in urls:
-                filename = "{}-{}-{}.xml".format(list_type, os.path.basename(url)[:-4], now().date().isoformat())
-                source = SanctionsListFile.objects.create_from_url(url, filename, list_type=list_type)
-                sources.append(source)
-        if not sources:
+            url = "https://scsanctions.un.org/resources/xml/en/consolidated.xml"
+            filename = "{}-{}-{}.xml".format(list_type, os.path.basename(url)[:-4], now().date().isoformat())
+            source = SanctionsListFile.objects.create_from_url(url, filename, list_type=list_type)
+        if not source:
             print("Nothing to import")
             return
 
@@ -58,4 +53,4 @@ class Command(SafeCommand):
         import_un_sanctions(source, verbose=verbose)
 
         if options["delete_old"]:
-            delete_old_sanction_list_files(list_type, sources)
+            delete_old_sanction_list_files(list_type, [source])

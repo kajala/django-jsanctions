@@ -55,8 +55,9 @@ class Command(SafeCommand):
             print("Nothing to import")
             return
 
-        assert isinstance(source, SanctionsListFile)
-        import_ofac_sanctions(source, verbose=verbose)
+        for source in sources:
+            assert isinstance(source, SanctionsListFile)
+            import_ofac_sanctions(source, verbose=verbose)
 
         if options["delete_old"]:
             delete_old_sanction_list_files(list_type, sources)
