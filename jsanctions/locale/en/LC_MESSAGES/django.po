@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-12 09:44+0000\n"
+"POT-Creation-Date: 2021-03-17 04:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,23 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: jsanctions/admin.py:281
+#: jsanctions/admin.py:87 jsanctions/models.py:298
+msgid "sanction entities"
+msgstr ""
+
+#: jsanctions/admin.py:292
 msgid "decade born"
 msgstr ""
 
-#: jsanctions/admin.py:314
+#: jsanctions/admin.py:325
 msgid "residence country"
 msgstr ""
 
-#: jsanctions/admin.py:336
+#: jsanctions/admin.py:347
 msgid "citizenship country"
 msgstr ""
 
-#: jsanctions/admin.py:399 jsanctions/models.py:175
+#: jsanctions/admin.py:424 jsanctions/models.py:294
+msgid "data"
+msgstr ""
+
+#: jsanctions/admin.py:431 jsanctions/models.py:182
 msgid "name aliases"
 msgstr ""
 
-#: jsanctions/admin.py:404
+#: jsanctions/admin.py:437
 msgid "birth year"
 msgstr ""
 
@@ -42,313 +50,337 @@ msgstr ""
 msgid "Sanction Lists"
 msgstr ""
 
-#: jsanctions/models.py:15 jsanctions/models.py:107
+#: jsanctions/models.py:22 jsanctions/models.py:103
 msgid "remark"
 msgstr ""
 
-#: jsanctions/models.py:22 jsanctions/models.py:153
+#: jsanctions/models.py:35 jsanctions/models.py:160
 msgid "regulation summary"
 msgstr ""
 
-#: jsanctions/models.py:55
+#: jsanctions/models.py:75
 msgid "created"
 msgstr ""
 
-#: jsanctions/models.py:56
+#: jsanctions/models.py:77
 msgid "imported"
 msgstr ""
 
-#: jsanctions/models.py:57
+#: jsanctions/models.py:80
 msgid "generation date"
 msgstr ""
 
-#: jsanctions/models.py:58
+#: jsanctions/models.py:82
 msgid "file"
 msgstr ""
 
-#: jsanctions/models.py:61
-msgid "sanction list"
+#: jsanctions/models.py:83
+msgid "list type"
 msgstr ""
 
-#: jsanctions/models.py:62
-msgid "sanction lists"
-msgstr ""
-
-#: jsanctions/models.py:74
+#: jsanctions/models.py:84
 msgid "global file id"
 msgstr ""
 
-#: jsanctions/models.py:77
-msgid "EU combined sanction list"
+#: jsanctions/models.py:87
+msgid "sanction list"
 msgstr ""
 
-#: jsanctions/models.py:78
-msgid "EU combined sanction lists"
+#: jsanctions/models.py:88
+msgid "sanction lists"
 msgstr ""
 
-#: jsanctions/models.py:104
+#: jsanctions/models.py:100
 msgid "text"
 msgstr ""
 
-#: jsanctions/models.py:108
+#: jsanctions/models.py:104
 msgid "remarks"
 msgstr ""
 
-#: jsanctions/models.py:119
-msgid "code"
+#: jsanctions/models.py:120
+msgid "person"
 msgstr ""
 
-#: jsanctions/models.py:120
+#: jsanctions/models.py:121
+msgid "enterprise"
+msgstr ""
+
+#: jsanctions/models.py:122
+msgid "vessel"
+msgstr ""
+
+#: jsanctions/models.py:123
+msgid "aircraft"
+msgstr ""
+
+#: jsanctions/models.py:126
 msgid "classification code"
 msgstr ""
 
-#: jsanctions/models.py:123 jsanctions/models.py:272
+#: jsanctions/models.py:127
+msgid "code"
+msgstr ""
+
+#: jsanctions/models.py:130 jsanctions/models.py:292
 msgid "subject type"
 msgstr ""
 
-#: jsanctions/models.py:124
+#: jsanctions/models.py:131
 msgid "subject types"
 msgstr ""
 
-#: jsanctions/models.py:131 jsanctions/models.py:161 jsanctions/models.py:186
-#: jsanctions/models.py:211 jsanctions/models.py:233 jsanctions/models.py:247
-#: jsanctions/models.py:275
+#: jsanctions/models.py:138 jsanctions/models.py:168 jsanctions/models.py:195
+#: jsanctions/models.py:225 jsanctions/models.py:248 jsanctions/models.py:262
+#: jsanctions/models.py:297
 msgid "sanction entity"
 msgstr ""
 
-#: jsanctions/models.py:132 jsanctions/models.py:147
+#: jsanctions/models.py:139 jsanctions/models.py:154
 msgid "regulation type"
 msgstr ""
 
-#: jsanctions/models.py:133
+#: jsanctions/models.py:140
 msgid "organization type"
 msgstr ""
 
-#: jsanctions/models.py:134 jsanctions/models.py:149
+#: jsanctions/models.py:141 jsanctions/models.py:156
 msgid "publication date"
 msgstr ""
 
-#: jsanctions/models.py:135 jsanctions/models.py:150
+#: jsanctions/models.py:142 jsanctions/models.py:157
 msgid "url"
 msgstr ""
 
-#: jsanctions/models.py:136
+#: jsanctions/models.py:143
 msgid "entry into force date"
 msgstr ""
 
-#: jsanctions/models.py:137 jsanctions/models.py:148
+#: jsanctions/models.py:144 jsanctions/models.py:155
 msgid "number title"
 msgstr ""
 
-#: jsanctions/models.py:138
+#: jsanctions/models.py:145
 msgid "programmer"
 msgstr ""
 
-#: jsanctions/models.py:139 jsanctions/models.py:170 jsanctions/models.py:202
-#: jsanctions/models.py:225 jsanctions/models.py:238 jsanctions/models.py:258
-#: jsanctions/models.py:271
+#: jsanctions/models.py:146 jsanctions/models.py:177 jsanctions/models.py:212
+#: jsanctions/models.py:240 jsanctions/models.py:253 jsanctions/models.py:273
+#: jsanctions/models.py:290
 msgid "logical id"
 msgstr ""
 
-#: jsanctions/models.py:142
+#: jsanctions/models.py:149
 msgid "regulation"
 msgstr ""
 
-#: jsanctions/models.py:143
+#: jsanctions/models.py:150
 msgid "regulations"
 msgstr ""
 
-#: jsanctions/models.py:154
+#: jsanctions/models.py:161
 msgid "regulation summaries"
 msgstr ""
 
-#: jsanctions/models.py:162
+#: jsanctions/models.py:169
 msgid "first name"
 msgstr ""
 
-#: jsanctions/models.py:163
+#: jsanctions/models.py:170
 msgid "middle name"
 msgstr ""
 
-#: jsanctions/models.py:164
+#: jsanctions/models.py:171
 msgid "last name"
 msgstr ""
 
-#: jsanctions/models.py:165
+#: jsanctions/models.py:172
 msgid "whole name"
 msgstr ""
 
-#: jsanctions/models.py:166
+#: jsanctions/models.py:173
 msgid "name language"
 msgstr ""
 
-#: jsanctions/models.py:167
+#: jsanctions/models.py:174
 msgid "function"
 msgstr ""
 
-#: jsanctions/models.py:168
+#: jsanctions/models.py:175
 msgid "title"
 msgstr ""
 
-#: jsanctions/models.py:169
+#: jsanctions/models.py:176
 msgid "regulation language"
 msgstr ""
 
-#: jsanctions/models.py:174
+#: jsanctions/models.py:181
 msgid "name alias"
 msgstr ""
 
-#: jsanctions/models.py:187
+#: jsanctions/models.py:196
 msgid "diplomatic"
 msgstr ""
 
-#: jsanctions/models.py:188
+#: jsanctions/models.py:197
 msgid "known expired"
 msgstr ""
 
-#: jsanctions/models.py:189
+#: jsanctions/models.py:198
 msgid "known false"
 msgstr ""
 
-#: jsanctions/models.py:190
+#: jsanctions/models.py:199
 msgid "reported lost"
 msgstr ""
 
-#: jsanctions/models.py:191
+#: jsanctions/models.py:200
 msgid "revoked by issuer"
 msgstr ""
 
-#: jsanctions/models.py:192 jsanctions/models.py:197
+#: jsanctions/models.py:201
+msgid "issue date"
+msgstr ""
+
+#: jsanctions/models.py:202 jsanctions/models.py:207
 msgid "issued by"
 msgstr ""
 
-#: jsanctions/models.py:193
+#: jsanctions/models.py:203
 msgid "latin number"
 msgstr ""
 
-#: jsanctions/models.py:194
+#: jsanctions/models.py:204
 msgid "name on document"
 msgstr ""
 
-#: jsanctions/models.py:195
+#: jsanctions/models.py:205
 msgid "number"
 msgstr ""
 
-#: jsanctions/models.py:196 jsanctions/models.py:220 jsanctions/models.py:234
-#: jsanctions/models.py:254
+#: jsanctions/models.py:206 jsanctions/models.py:235 jsanctions/models.py:249
+#: jsanctions/models.py:269
 msgid "region"
 msgstr ""
 
-#: jsanctions/models.py:198 jsanctions/models.py:223 jsanctions/models.py:236
-#: jsanctions/models.py:256
+#: jsanctions/models.py:208 jsanctions/models.py:238 jsanctions/models.py:251
+#: jsanctions/models.py:271
 msgid "country description"
 msgstr ""
 
-#: jsanctions/models.py:199 jsanctions/models.py:200
+#: jsanctions/models.py:209 jsanctions/models.py:210
 msgid "identification type code"
 msgstr ""
 
-#: jsanctions/models.py:201 jsanctions/models.py:224 jsanctions/models.py:237
-#: jsanctions/models.py:257
+#: jsanctions/models.py:211 jsanctions/models.py:239 jsanctions/models.py:252
+#: jsanctions/models.py:272
 msgid "regional language"
 msgstr ""
 
-#: jsanctions/models.py:206
+#: jsanctions/models.py:216
 msgid "identification"
 msgstr ""
 
-#: jsanctions/models.py:207
+#: jsanctions/models.py:217
 msgid "identifications"
 msgstr ""
 
-#: jsanctions/models.py:212
+#: jsanctions/models.py:226
 msgid "circa"
 msgstr ""
 
-#: jsanctions/models.py:213
+#: jsanctions/models.py:227
 msgid "calendar type"
 msgstr ""
 
-#: jsanctions/models.py:214 jsanctions/models.py:248
+#: jsanctions/models.py:228 jsanctions/models.py:263
 msgid "city"
 msgstr ""
 
-#: jsanctions/models.py:215 jsanctions/models.py:251
+#: jsanctions/models.py:229 jsanctions/models.py:231 jsanctions/models.py:266
 msgid "zip code"
 msgstr ""
 
-#: jsanctions/models.py:216 jsanctions/models.py:228
+#: jsanctions/models.py:230 jsanctions/models.py:243
 msgid "birth date"
 msgstr ""
 
-#: jsanctions/models.py:217
+#: jsanctions/models.py:232
 msgid "day of month"
 msgstr ""
 
-#: jsanctions/models.py:218
+#: jsanctions/models.py:233
 msgid "month of year"
 msgstr ""
 
-#: jsanctions/models.py:219
+#: jsanctions/models.py:234
 msgid "year"
 msgstr ""
 
-#: jsanctions/models.py:221 jsanctions/models.py:253
+#: jsanctions/models.py:236 jsanctions/models.py:268
 msgid "place"
 msgstr ""
 
-#: jsanctions/models.py:222 jsanctions/models.py:235 jsanctions/models.py:255
+#: jsanctions/models.py:237 jsanctions/models.py:250 jsanctions/models.py:270
 msgid "country"
 msgstr ""
 
-#: jsanctions/models.py:229
+#: jsanctions/models.py:244
 msgid "birth dates"
 msgstr ""
 
-#: jsanctions/models.py:242
+#: jsanctions/models.py:257
 msgid "citizenship"
 msgstr ""
 
-#: jsanctions/models.py:243
+#: jsanctions/models.py:258
 msgid "citizenships"
 msgstr ""
 
-#: jsanctions/models.py:249
+#: jsanctions/models.py:264
 msgid "street"
 msgstr ""
 
-#: jsanctions/models.py:250
+#: jsanctions/models.py:265
 msgid "p.o. box"
 msgstr ""
 
-#: jsanctions/models.py:252
+#: jsanctions/models.py:267
 msgid "as at listing time"
 msgstr ""
 
-#: jsanctions/models.py:262
+#: jsanctions/models.py:277
 msgid "address"
 msgstr ""
 
-#: jsanctions/models.py:263
+#: jsanctions/models.py:278
 msgid "addresses"
 msgstr ""
 
-#: jsanctions/models.py:267
+#: jsanctions/models.py:286
 msgid "source"
 msgstr ""
 
-#: jsanctions/models.py:268
+#: jsanctions/models.py:287
 msgid "designation details"
 msgstr ""
 
-#: jsanctions/models.py:269
+#: jsanctions/models.py:288
 msgid "United Nation identifier"
 msgstr ""
 
-#: jsanctions/models.py:270
+#: jsanctions/models.py:289
 msgid "EU reference number"
 msgstr ""
 
-#: jsanctions/models.py:276
-msgid "sanction entities"
+#: jsanctions/ofac.py:41
+msgid "Invalid date value {}"
+msgstr ""
+
+#: jsanctions/ofac.py:85
+msgid "UID missing"
+msgstr ""
+
+#: jsanctions/un.py:54
+msgid "DATAID missing"
 msgstr ""
