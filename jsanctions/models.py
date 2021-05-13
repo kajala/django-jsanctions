@@ -10,7 +10,6 @@ from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from jutil.format import is_media_full_path, strip_media_root, get_media_full_path
 from jutil.modelfields import SafeCharField, SafeTextField
-
 from jsanctions.helpers import get_country_iso2_code
 
 logger = logging.getLogger(__name__)
@@ -296,3 +295,6 @@ class SanctionEntity(SanctionListObject):
     class Meta:
         verbose_name = _("sanction entity")
         verbose_name_plural = _("sanction entities")
+
+    def __str__(self):
+        return "{}-{}".format(self.source.list_type, self.logical_id)
