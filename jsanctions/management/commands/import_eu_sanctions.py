@@ -27,11 +27,7 @@ class Command(SafeCommand):
         source: Optional[SanctionsListFile] = None
         if options["url"]:
             url = options["url"]
-            filename = (
-                options["file"]
-                if options["file"]
-                else "{}-consolidated-{}.xml".format(list_type, now().date().isoformat())
-            )
+            filename = options["file"] if options["file"] else "{}-consolidated-{}.xml".format(list_type, now().date().isoformat())
             source = SanctionsListFile.objects.create_from_url(url, filename, list_type=list_type)
         elif options["file"]:
             source = SanctionsListFile.objects.create_from_filename(options["file"], list_type=list_type)

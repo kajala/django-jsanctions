@@ -14,8 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="sanctionentity",
             name="data",
-            field=models.JSONField(
-                blank=True, default=dict, encoder=django.core.serializers.json.DjangoJSONEncoder, verbose_name="data"
-            ),
+            field=models.JSONField(blank=True, default=dict, encoder=django.core.serializers.json.DjangoJSONEncoder, verbose_name="data"),
         ),
     ]

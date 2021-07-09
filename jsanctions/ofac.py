@@ -226,8 +226,6 @@ def import_ofac_sanctions(source: SanctionsListFile, verbose: bool = False):
 
     source.imported = now()
     source.save()
-    msg = "Imported {} sanction entities from {} in {}".format(
-        len(entities_list), source.full_path, source.imported - t0
-    )
+    msg = "Imported {} sanction entities from {} in {}".format(len(entities_list), source.full_path, source.imported - t0)
     logger.info(msg)
     admin_log([source], msg)

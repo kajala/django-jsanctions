@@ -118,9 +118,7 @@ def create_un_document(se: SanctionEntity, **kwargs) -> Identification:
     id_obj.identification_type_description = kwargs.get("TYPE_OF_DOCUMENT") or kwargs.get("TYPE_OF_DOCUMENT2") or ""
     id_obj.issue_date = parse_date(str(kwargs.get("DATE_OF_ISSUE"))) if kwargs.get("DATE_OF_ISSUE") else None  # type: ignore
     id_obj.latin_number = kwargs.get("NUMBER") or ""
-    id_obj.issued_by = "{} {} {}".format(
-        kwargs.get("CITY_OF_ISSUE") or "", kwargs.get("COUNTRY_OF_ISSUE") or "", kwargs.get("ISSUING_COUNTRY") or ""
-    ).strip()
+    id_obj.issued_by = "{} {} {}".format(kwargs.get("CITY_OF_ISSUE") or "", kwargs.get("COUNTRY_OF_ISSUE") or "", kwargs.get("ISSUING_COUNTRY") or "").strip()
     id_obj.country_description = kwargs.get("COUNTRY_OF_ISSUE") or kwargs.get("ISSUING_COUNTRY") or ""
     id_obj.full_clean()
     id_obj.save()

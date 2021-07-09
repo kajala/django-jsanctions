@@ -14,9 +14,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="sanctionslistfile",
             name="list_type",
-            field=jutil.modelfields.SafeCharField(
-                db_index=True, default="EU-Combined", max_length=128, verbose_name="list type"
-            ),
+            field=jutil.modelfields.SafeCharField(db_index=True, default="EU-Combined", max_length=128, verbose_name="list type"),
             preserve_default=False,
         ),
     ]

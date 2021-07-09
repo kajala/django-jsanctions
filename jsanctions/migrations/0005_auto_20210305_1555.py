@@ -18,8 +18,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="sanctionslistfile",
             name="global_file_id",
-            field=jutil.modelfields.SafeCharField(
-                blank=True, default="", max_length=512, verbose_name="global file id"
-            ),
+            field=jutil.modelfields.SafeCharField(blank=True, default="", max_length=512, verbose_name="global file id"),
         ),
     ]

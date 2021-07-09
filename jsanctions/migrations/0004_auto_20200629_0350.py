@@ -19,9 +19,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="address",
             name="country_description",
-            field=jutil.modelfields.SafeCharField(
-                blank=True, default="", max_length=512, verbose_name="country description"
-            ),
+            field=jutil.modelfields.SafeCharField(blank=True, default="", max_length=512, verbose_name="country description"),
         ),
         migrations.AlterField(
             model_name="address",
@@ -46,9 +44,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="address",
             name="regulation_language",
-            field=jutil.modelfields.SafeCharField(
-                blank=True, default="", max_length=5, verbose_name="regional language"
-            ),
+            field=jutil.modelfields.SafeCharField(blank=True, default="", max_length=5, verbose_name="regional language"),
         ),
         migrations.AlterField(
             model_name="address",
@@ -73,9 +69,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="birthdate",
             name="country_description",
-            field=jutil.modelfields.SafeCharField(
-                blank=True, default="", max_length=512, verbose_name="country description"
-            ),
+            field=jutil.modelfields.SafeCharField(blank=True, default="", max_length=512, verbose_name="country description"),
         ),
         migrations.AlterField(
             model_name="birthdate",
@@ -95,9 +89,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="birthdate",
             name="regulation_language",
-            field=jutil.modelfields.SafeCharField(
-                blank=True, default="", max_length=5, verbose_name="regional language"
-            ),
+            field=jutil.modelfields.SafeCharField(blank=True, default="", max_length=5, verbose_name="regional language"),
         ),
         migrations.AlterField(
             model_name="birthdate",
@@ -107,9 +99,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="citizenship",
             name="country_description",
-            field=jutil.modelfields.SafeCharField(
-                blank=True, default="", max_length=512, verbose_name="country description"
-            ),
+            field=jutil.modelfields.SafeCharField(blank=True, default="", max_length=512, verbose_name="country description"),
         ),
         migrations.AlterField(
             model_name="citizenship",
@@ -124,23 +114,17 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="citizenship",
             name="regulation_language",
-            field=jutil.modelfields.SafeCharField(
-                blank=True, default="", max_length=5, verbose_name="regional language"
-            ),
+            field=jutil.modelfields.SafeCharField(blank=True, default="", max_length=5, verbose_name="regional language"),
         ),
         migrations.AlterField(
             model_name="eucombinedsanctionslist",
             name="global_file_id",
-            field=jutil.modelfields.SafeCharField(
-                blank=True, default="", max_length=512, verbose_name="global file id"
-            ),
+            field=jutil.modelfields.SafeCharField(blank=True, default="", max_length=512, verbose_name="global file id"),
         ),
         migrations.AlterField(
             model_name="identification",
             name="country_description",
-            field=jutil.modelfields.SafeCharField(
-                blank=True, default="", max_length=512, verbose_name="country description"
-            ),
+            field=jutil.modelfields.SafeCharField(blank=True, default="", max_length=512, verbose_name="country description"),
         ),
         migrations.AlterField(
             model_name="identification",
@@ -150,16 +134,12 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="identification",
             name="identification_type_code",
-            field=jutil.modelfields.SafeCharField(
-                blank=True, default="", max_length=32, verbose_name="identification type code"
-            ),
+            field=jutil.modelfields.SafeCharField(blank=True, default="", max_length=32, verbose_name="identification type code"),
         ),
         migrations.AlterField(
             model_name="identification",
             name="identification_type_description",
-            field=jutil.modelfields.SafeCharField(
-                blank=True, default="", max_length=512, verbose_name="identification type code"
-            ),
+            field=jutil.modelfields.SafeCharField(blank=True, default="", max_length=512, verbose_name="identification type code"),
         ),
         migrations.AlterField(
             model_name="identification",
@@ -174,9 +154,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="identification",
             name="name_on_document",
-            field=jutil.modelfields.SafeCharField(
-                blank=True, default="", max_length=512, verbose_name="name on document"
-            ),
+            field=jutil.modelfields.SafeCharField(blank=True, default="", max_length=512, verbose_name="name on document"),
         ),
         migrations.AlterField(
             model_name="identification",
@@ -191,9 +169,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="identification",
             name="regulation_language",
-            field=jutil.modelfields.SafeCharField(
-                blank=True, default="", max_length=5, verbose_name="regional language"
-            ),
+            field=jutil.modelfields.SafeCharField(blank=True, default="", max_length=5, verbose_name="regional language"),
         ),
         migrations.AlterField(
             model_name="namealias",
@@ -223,9 +199,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="namealias",
             name="regulation_language",
-            field=jutil.modelfields.SafeCharField(
-                blank=True, default="", max_length=5, verbose_name="regulation language"
-            ),
+            field=jutil.modelfields.SafeCharField(blank=True, default="", max_length=5, verbose_name="regulation language"),
         ),
         migrations.AlterField(
             model_name="namealias",
@@ -245,9 +219,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="regulation",
             name="organisation_type",
-            field=jutil.modelfields.SafeCharField(
-                blank=True, default="", max_length=512, verbose_name="organization type"
-            ),
+            field=jutil.modelfields.SafeCharField(blank=True, default="", max_length=512, verbose_name="organization type"),
         ),
         migrations.AlterField(
             model_name="regulation",
@@ -257,9 +229,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="regulation",
             name="regulation_type",
-            field=jutil.modelfields.SafeCharField(
-                blank=True, default="", max_length=512, verbose_name="regulation type"
-            ),
+            field=jutil.modelfields.SafeCharField(blank=True, default="", max_length=512, verbose_name="regulation type"),
         ),
         migrations.AlterField(
             model_name="regulationsummary",
@@ -269,9 +239,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="regulationsummary",
             name="regulation_type",
-            field=jutil.modelfields.SafeCharField(
-                blank=True, default="", max_length=32, verbose_name="regulation type"
-            ),
+            field=jutil.modelfields.SafeCharField(blank=True, default="", max_length=32, verbose_name="regulation type"),
         ),
         migrations.AlterField(
             model_name="remark",
@@ -281,30 +249,22 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="sanctionentity",
             name="designation_details",
-            field=jutil.modelfields.SafeCharField(
-                blank=True, default="", max_length=512, verbose_name="designation details"
-            ),
+            field=jutil.modelfields.SafeCharField(blank=True, default="", max_length=512, verbose_name="designation details"),
         ),
         migrations.AlterField(
             model_name="sanctionentity",
             name="eu_reference_number",
-            field=jutil.modelfields.SafeCharField(
-                blank=True, default="", max_length=512, verbose_name="EU reference number"
-            ),
+            field=jutil.modelfields.SafeCharField(blank=True, default="", max_length=512, verbose_name="EU reference number"),
         ),
         migrations.AlterField(
             model_name="sanctionentity",
             name="united_nation_id",
-            field=jutil.modelfields.SafeCharField(
-                blank=True, default="", max_length=512, verbose_name="United Nation identifier"
-            ),
+            field=jutil.modelfields.SafeCharField(blank=True, default="", max_length=512, verbose_name="United Nation identifier"),
         ),
         migrations.AlterField(
             model_name="subjecttype",
             name="classification_code",
-            field=jutil.modelfields.SafeCharField(
-                blank=True, default="", max_length=32, verbose_name="classification code"
-            ),
+            field=jutil.modelfields.SafeCharField(blank=True, default="", max_length=32, verbose_name="classification code"),
         ),
         migrations.AlterField(
             model_name="subjecttype",

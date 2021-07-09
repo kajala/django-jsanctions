@@ -75,9 +75,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "imported",
-                    models.DateTimeField(
-                        blank=True, db_index=True, default=None, editable=False, null=True, verbose_name="imported"
-                    ),
+                    models.DateTimeField(blank=True, db_index=True, default=None, editable=False, null=True, verbose_name="imported"),
                 ),
                 (
                     "generation_date",

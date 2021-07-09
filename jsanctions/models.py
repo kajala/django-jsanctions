@@ -72,12 +72,8 @@ class SanctionListObject(models.Model):
 class SanctionsListFile(SanctionListObject):
     objects = SanctionsListFileManager()  # type: ignore
     created = models.DateTimeField(verbose_name=_("created"), default=now, blank=True, editable=False, db_index=True)
-    imported = models.DateTimeField(
-        verbose_name=_("imported"), default=None, null=True, blank=True, editable=False, db_index=True
-    )
-    generation_date = models.DateField(
-        verbose_name=_("generation date"), default=None, blank=True, null=True, editable=False, db_index=True
-    )
+    imported = models.DateTimeField(verbose_name=_("imported"), default=None, null=True, blank=True, editable=False, db_index=True)
+    generation_date = models.DateField(verbose_name=_("generation date"), default=None, blank=True, null=True, editable=False, db_index=True)
     file = models.FileField(verbose_name=_("file"), upload_to="uploads", validators=[FileExtensionValidator(["xml"])])
     list_type = SafeCharField(verbose_name=_("list type"), max_length=128, db_index=True)
     global_file_id = SafeCharField(verbose_name=_("global file id"), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
@@ -287,9 +283,7 @@ class SanctionEntity(SanctionListObject):
     united_nation_id = SafeCharField(verbose_name=_("United Nation identifier"), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
     eu_reference_number = SafeCharField(verbose_name=_("EU reference number"), **DEFAULT_DESCRIPTION_TYPE)  # type: ignore
     logical_id = models.BigIntegerField(verbose_name=_("logical id"), blank=True, null=True, default=None)
-    subject_type = models.ForeignKey(
-        SubjectType, verbose_name=_("subject type"), on_delete=models.PROTECT, null=True, default=None, blank=True
-    )
+    subject_type = models.ForeignKey(SubjectType, verbose_name=_("subject type"), on_delete=models.PROTECT, null=True, default=None, blank=True)
     data = models.JSONField(_("data"), default=dict, blank=True, encoder=DjangoJSONEncoder)  # type: ignore
 
     class Meta:

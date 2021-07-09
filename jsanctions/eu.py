@@ -101,9 +101,7 @@ def set_eu_members(obj: Any, data: Dict[str, Any], verbose: bool = False, paddin
             k = camel_case_to_underscore(k0)
             if hasattr(obj, k):
                 if k == "subject_type":
-                    obj2 = SubjectType.objects.get_or_create(
-                        code=v0.get("@code", ""), classification_code=v0.get("@classificationCode", "")
-                    )[0]
+                    obj2 = SubjectType.objects.get_or_create(code=v0.get("@code", ""), classification_code=v0.get("@classificationCode", ""))[0]
                 elif k == "regulation_summary":
                     obj2 = RegulationSummary.objects.get_or_create(
                         regulation_type=v0.get("@regulationType", ""),
@@ -160,8 +158,6 @@ def import_eu_sanctions(source: SanctionsListFile, verbose: bool = False):
             set_eu_members(se, se_data, verbose=verbose, padding=4, sanction=se)
     source.imported = now()
     source.save()
-    msg = "Imported {} sanction entities from {} in {}".format(
-        len(entities_list), source.full_path, source.imported - t0
-    )
+    msg = "Imported {} sanction entities from {} in {}".format(len(entities_list), source.full_path, source.imported - t0)
     logger.info(msg)
     admin_log([source], msg)

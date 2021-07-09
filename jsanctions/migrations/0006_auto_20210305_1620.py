@@ -14,9 +14,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="sanctionentity",
             name="source",
-            field=models.ForeignKey(
-                on_delete=django.db.models.deletion.CASCADE, to="jsanctions.SanctionsListFile", verbose_name="source"
-            ),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="jsanctions.SanctionsListFile", verbose_name="source"),
         ),
         migrations.DeleteModel(
             name="EuCombinedSanctionsList",
