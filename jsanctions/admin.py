@@ -1,10 +1,9 @@
 import json
 import traceback
 from typing import Sequence
-from django.conf.urls import url
 from django.contrib import admin
 from django.contrib import messages
-from django.urls import ResolverMatch, reverse
+from django.urls import ResolverMatch, reverse, path
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.utils.timezone import now
@@ -448,8 +447,8 @@ class SanctionEntityAdmin(SanctionsListAdminBase):
     def get_urls(self):
         info = self.model._meta.app_label, self.model._meta.model_name  # type: ignore  # noqa
         return [
-            url(
-                r"^by-source/(?P<source_id>\d+)/$",
+            path(
+                "by-source/<int:source_id>/",
                 self.admin_site.admin_view(self.kw_changelist_view),
                 name="%s_%s_source_changelist" % info,
             ),
