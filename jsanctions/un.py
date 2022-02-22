@@ -172,7 +172,8 @@ def set_un_members(  # noqa
 
 def import_un_sanctions(source: SanctionsListFile, verbose: bool = False):
     data = load_un_sanction_list_as_dict(source.full_path)
-    source.generation_date = parse_datetime(data["@dateGenerated"]).date()
+    generation_date_str = data.get("@dateGenerated") or data.get("@generationDate")
+    source.generation_date = parse_datetime(generation_date_str).date()
 
     enterprise, created = SubjectType.objects.get_or_create(classification_code=SubjectType.ENTERPRISE)
     assert isinstance(enterprise, SubjectType)
