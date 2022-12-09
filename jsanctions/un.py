@@ -172,6 +172,8 @@ def set_un_members(  # noqa
 def import_un_sanctions(source: SanctionsListFile, verbose: bool = False):
     data = load_un_sanction_list_as_dict(source.full_path)
     generation_date_str = data.get("@dateGenerated") or data.get("@generationDate")
+    if not generation_date_str:
+        raise Exception("Generation date missing")
     source.generation_date = parse_datetime(generation_date_str).date()
 
     enterprise, created = SubjectType.objects.get_or_create(classification_code=SubjectType.ENTERPRISE)

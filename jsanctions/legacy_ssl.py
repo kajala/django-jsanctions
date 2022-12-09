@@ -8,7 +8,7 @@ class CustomHttpAdapter(requests.adapters.HTTPAdapter):
         self.ssl_context = ssl_context
         super().__init__(**kwargs)
 
-    def init_poolmanager(self, connections, maxsize, block=False):
+    def init_poolmanager(self, connections, maxsize, block=False):  # noqa
         self.poolmanager = urllib3.poolmanager.PoolManager(num_pools=connections, maxsize=maxsize, block=block, ssl_context=self.ssl_context)
 
 

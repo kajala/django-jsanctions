@@ -12,7 +12,7 @@ def delete_old_sanction_list_files(list_type: str, exclude: List[SanctionsListFi
     for e in qs:
         assert isinstance(e, SanctionsListFile)
         logger.info("Deleting SanctionsListFile id=%s", e.id)
-        if os.path.isfile(e.full_path) and not any([ex.full_path == e.full_path for ex in exclude]):
+        if os.path.isfile(e.full_path) and not any(ex.full_path == e.full_path for ex in exclude):
             os.unlink(e.full_path)
             logger.info("%s deleted", e.full_path)
         SanctionEntity.objects.all().filter(source=e).delete()
