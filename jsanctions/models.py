@@ -1,6 +1,6 @@
 import logging
 import os
-from urllib.request import urlopen
+import requests
 from django.core.files import File
 from django.core.files.base import ContentFile
 from django.core.serializers.json import DjangoJSONEncoder
@@ -11,6 +11,7 @@ from django.utils.translation import gettext_lazy as _
 from jutil.format import is_media_full_path, strip_media_root, get_media_full_path
 from jutil.modelfields import SafeCharField, SafeTextField
 from jsanctions.helpers import get_country_iso2_code
+from jsanctions.legacy_ssl import get_legacy_session
 
 logger = logging.getLogger(__name__)
 
@@ -55,9 +56,9 @@ class SanctionsListFileManager(models.Manager):
             logger.info("%s written", file.file)
         return file
 
-    def create_from_url(self, url: str, filename: str, **kwargs):
-        response = urlopen(url)
-        body = response.read()
+    def create_from_url(self, url: str, filename: str, legacy_ssl: bool = False, **kwargs):
+        res = get_legacy_session().get(url) if legacy_ssl else requests.get(url)
+        body = res.content
         plain_filename = os.path.basename(filename)
         file = self.create(**kwargs)
         file.file.save(plain_filename, ContentFile(body))

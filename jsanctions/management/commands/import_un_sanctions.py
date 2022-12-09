@@ -40,7 +40,7 @@ class Command(SafeCommand):
         if options["url_defaults"]:
             url = "https://scsanctions.un.org/resources/xml/en/consolidated.xml"
             filename = "{}-{}-{}.xml".format(list_type, os.path.basename(url)[:-4], now().date().isoformat())
-            source = SanctionsListFile.objects.create_from_url(url, filename, list_type=list_type)
+            source = SanctionsListFile.objects.create_from_url(url, filename, legacy_ssl=True, list_type=list_type)
         if not source:
             print("Nothing to import")
             return

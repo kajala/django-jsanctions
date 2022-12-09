@@ -9,7 +9,6 @@ from jutil.admin import admin_log
 from jutil.format import choices_label
 from jutil.parse import parse_datetime
 from jutil.xml import xml_to_dict
-
 from jsanctions.helpers import get_country_iso2_code
 from jsanctions.models import (
     SanctionsListFile,
@@ -167,7 +166,7 @@ def set_un_members(  # noqa
     se.full_clean()
     se.save()
     if verbose:
-        logger.info("%sSaved %s", padding * " ", se)
+        logger.debug("%sSaved %s", padding * " ", se)
 
 
 def import_un_sanctions(source: SanctionsListFile, verbose: bool = False):
@@ -191,7 +190,7 @@ def import_un_sanctions(source: SanctionsListFile, verbose: bool = False):
     for se_data in individuals_list:
         assert isinstance(se_data, dict)
         if verbose:
-            logger.info("  sdnEntry uid %s", se_data.get("uid"))
+            logger.debug("  sdnEntry uid %s", se_data.get("uid"))
         with transaction.atomic():
             se = SanctionEntity.objects.create(source=source, data=se_data, subject_type=person)
             set_un_members(se, se_data, verbose=verbose, padding=4)
@@ -200,7 +199,7 @@ def import_un_sanctions(source: SanctionsListFile, verbose: bool = False):
     for se_data in entities_list:
         assert isinstance(se_data, dict)
         if verbose:
-            logger.info("  sdnEntry uid %s", se_data.get("uid"))
+            logger.debug("  sdnEntry uid %s", se_data.get("uid"))
         with transaction.atomic():
             se = SanctionEntity.objects.create(source=source, data=se_data, subject_type=enterprise)
             set_un_members(se, se_data, verbose=verbose, padding=4)

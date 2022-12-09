@@ -1,3 +1,5 @@
 Django>=3.0.0
 django-jutil>=3.8.4
 django-extensions>=2.2.1
+requests>=2.19.1
+
