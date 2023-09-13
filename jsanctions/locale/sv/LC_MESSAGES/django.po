@@ -1,386 +1,380 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-13 01:11+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2023-09-12 20:11-0500\n"
+"Last-Translator: Google Translate API v3\n"
+"Language-Team: sv <jani>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: jsanctions/admin.py:86 jsanctions/models.py:292
 msgid "sanction entities"
-msgstr ""
+msgstr "sanktionsenheter"
 
 #: jsanctions/admin.py:291
 msgid "decade born"
-msgstr ""
+msgstr "decennium född"
 
 #: jsanctions/admin.py:324
 msgid "residence country"
-msgstr ""
+msgstr "uppehållsland"
 
 #: jsanctions/admin.py:346
 msgid "citizenship country"
-msgstr ""
+msgstr "medborgarskapsland"
 
 #: jsanctions/admin.py:423 jsanctions/models.py:288
 msgid "data"
-msgstr ""
+msgstr "data"
 
 #: jsanctions/admin.py:430 jsanctions/models.py:178
 msgid "name aliases"
-msgstr ""
+msgstr "namnalias"
 
 #: jsanctions/admin.py:436
 msgid "birth year"
-msgstr ""
+msgstr "födelseår"
 
 #: jsanctions/apps.py:7
 msgid "Sanction Lists"
-msgstr ""
+msgstr "Sanktionslistor"
 
 #: jsanctions/models.py:22 jsanctions/models.py:99
 msgid "remark"
-msgstr ""
+msgstr "anmärkning"
 
 #: jsanctions/models.py:35 jsanctions/models.py:156
 msgid "regulation summary"
-msgstr ""
+msgstr "förordningens sammanfattning"
 
 #: jsanctions/models.py:75
 msgid "created"
-msgstr ""
+msgstr "skapas"
 
 #: jsanctions/models.py:76
 msgid "imported"
-msgstr ""
+msgstr "importeras"
 
 #: jsanctions/models.py:77
 msgid "generation date"
-msgstr ""
+msgstr "generationsdatum"
 
 #: jsanctions/models.py:78
 msgid "file"
-msgstr ""
+msgstr "fil"
 
 #: jsanctions/models.py:79
 msgid "list type"
-msgstr ""
+msgstr "listtyp"
 
 #: jsanctions/models.py:80
 msgid "global file id"
-msgstr ""
+msgstr "globalt fil-id"
 
 #: jsanctions/models.py:83
 msgid "sanction list"
-msgstr ""
+msgstr "sanktionslista"
 
 #: jsanctions/models.py:84
 msgid "sanction lists"
-msgstr ""
+msgstr "sanktionslistor"
 
 #: jsanctions/models.py:96
 msgid "text"
-msgstr ""
+msgstr "text"
 
 #: jsanctions/models.py:100
 msgid "remarks"
-msgstr ""
+msgstr "anmärkningar"
 
 #: jsanctions/models.py:116
 msgid "person"
-msgstr ""
+msgstr "person"
 
 #: jsanctions/models.py:117
 msgid "enterprise"
-msgstr ""
+msgstr "företag"
 
 #: jsanctions/models.py:118
 msgid "vessel"
-msgstr ""
+msgstr "fartyg"
 
 #: jsanctions/models.py:119
 msgid "aircraft"
-msgstr ""
+msgstr "flygplan"
 
 #: jsanctions/models.py:122
 msgid "classification code"
-msgstr ""
+msgstr "klassificeringskod"
 
 #: jsanctions/models.py:123
 msgid "code"
-msgstr ""
+msgstr "koda"
 
 #: jsanctions/models.py:126 jsanctions/models.py:287
 msgid "subject type"
-msgstr ""
+msgstr "ämnestyp"
 
 #: jsanctions/models.py:127
 msgid "subject types"
-msgstr ""
+msgstr "ämnestyper"
 
 #: jsanctions/models.py:134 jsanctions/models.py:164 jsanctions/models.py:191
 #: jsanctions/models.py:221 jsanctions/models.py:244 jsanctions/models.py:258
 #: jsanctions/models.py:291
 msgid "sanction entity"
-msgstr ""
+msgstr "sanktionsenhet"
 
 #: jsanctions/models.py:135 jsanctions/models.py:150
 msgid "regulation type"
-msgstr ""
+msgstr "regleringstyp"
 
 #: jsanctions/models.py:136
 msgid "organization type"
-msgstr ""
+msgstr "Organisations typ"
 
 #: jsanctions/models.py:137 jsanctions/models.py:152
 msgid "publication date"
-msgstr ""
+msgstr "publiceringsdatum"
 
 #: jsanctions/models.py:138 jsanctions/models.py:153
 msgid "url"
-msgstr ""
+msgstr "url"
 
 #: jsanctions/models.py:139
 msgid "entry into force date"
-msgstr ""
+msgstr "ikraftträdandedatum"
 
 #: jsanctions/models.py:140 jsanctions/models.py:151
 msgid "number title"
-msgstr ""
+msgstr "nummertitel"
 
 #: jsanctions/models.py:141
 msgid "programmer"
-msgstr ""
+msgstr "programmerare"
 
 #: jsanctions/models.py:142 jsanctions/models.py:173 jsanctions/models.py:208
 #: jsanctions/models.py:236 jsanctions/models.py:249 jsanctions/models.py:269
 #: jsanctions/models.py:286
 msgid "logical id"
-msgstr ""
+msgstr "logiskt id"
 
 #: jsanctions/models.py:145
 msgid "regulation"
-msgstr ""
+msgstr "reglering"
 
 #: jsanctions/models.py:146
 msgid "regulations"
-msgstr ""
+msgstr "föreskrifter"
 
 #: jsanctions/models.py:157
 msgid "regulation summaries"
-msgstr ""
+msgstr "förordningssammanfattningar"
 
 #: jsanctions/models.py:165
 msgid "first name"
-msgstr ""
+msgstr "förnamn"
 
 #: jsanctions/models.py:166
 msgid "middle name"
-msgstr ""
+msgstr "mellannamn"
 
 #: jsanctions/models.py:167
 msgid "last name"
-msgstr ""
+msgstr "efternamn"
 
 #: jsanctions/models.py:168
 msgid "whole name"
-msgstr ""
+msgstr "hela namnet"
 
 #: jsanctions/models.py:169
 msgid "name language"
-msgstr ""
+msgstr "namnspråk"
 
 #: jsanctions/models.py:170
 msgid "function"
-msgstr ""
+msgstr "fungera"
 
 #: jsanctions/models.py:171
 msgid "title"
-msgstr ""
+msgstr "titel"
 
 #: jsanctions/models.py:172
 msgid "regulation language"
-msgstr ""
+msgstr "regleringsspråk"
 
 #: jsanctions/models.py:177
 msgid "name alias"
-msgstr ""
+msgstr "namnalias"
 
 #: jsanctions/models.py:192
 msgid "diplomatic"
-msgstr ""
+msgstr "diplomatisk"
 
 #: jsanctions/models.py:193
 msgid "known expired"
-msgstr ""
+msgstr "känt har gått ut"
 
 #: jsanctions/models.py:194
 msgid "known false"
-msgstr ""
+msgstr "känt falskt"
 
 #: jsanctions/models.py:195
 msgid "reported lost"
-msgstr ""
+msgstr "anmält förlorad"
 
 #: jsanctions/models.py:196
 msgid "revoked by issuer"
-msgstr ""
+msgstr "återkallad av emittenten"
 
 #: jsanctions/models.py:197
 msgid "issue date"
-msgstr ""
+msgstr "utfärdandedatum"
 
 #: jsanctions/models.py:198 jsanctions/models.py:203
 msgid "issued by"
-msgstr ""
+msgstr "Utfärdats av"
 
 #: jsanctions/models.py:199
 msgid "latin number"
-msgstr ""
+msgstr "latinska siffran"
 
 #: jsanctions/models.py:200
 msgid "name on document"
-msgstr ""
+msgstr "namn på dokumentet"
 
 #: jsanctions/models.py:201
 msgid "number"
-msgstr ""
+msgstr "siffra"
 
 #: jsanctions/models.py:202 jsanctions/models.py:231 jsanctions/models.py:245
 #: jsanctions/models.py:265
 msgid "region"
-msgstr ""
+msgstr "område"
 
 #: jsanctions/models.py:204 jsanctions/models.py:234 jsanctions/models.py:247
 #: jsanctions/models.py:267
 msgid "country description"
-msgstr ""
+msgstr "landsbeskrivning"
 
 #: jsanctions/models.py:205 jsanctions/models.py:206
 msgid "identification type code"
-msgstr ""
+msgstr "identifieringstypkod"
 
 #: jsanctions/models.py:207 jsanctions/models.py:235 jsanctions/models.py:248
 #: jsanctions/models.py:268
 msgid "regional language"
-msgstr ""
+msgstr "regionalt språk"
 
 #: jsanctions/models.py:212
 msgid "identification"
-msgstr ""
+msgstr "Identifiering"
 
 #: jsanctions/models.py:213
 msgid "identifications"
-msgstr ""
+msgstr "identifikationer"
 
 #: jsanctions/models.py:222
 msgid "circa"
-msgstr ""
+msgstr "cirka"
 
 #: jsanctions/models.py:223
 msgid "calendar type"
-msgstr ""
+msgstr "kalendertyp"
 
 #: jsanctions/models.py:224 jsanctions/models.py:259
 msgid "city"
-msgstr ""
+msgstr "stad"
 
 #: jsanctions/models.py:225 jsanctions/models.py:227 jsanctions/models.py:262
 msgid "zip code"
-msgstr ""
+msgstr "postnummer"
 
 #: jsanctions/models.py:226 jsanctions/models.py:239
 msgid "birth date"
-msgstr ""
+msgstr "födelsedatum"
 
 #: jsanctions/models.py:228
 msgid "day of month"
-msgstr ""
+msgstr "dag i månaden"
 
 #: jsanctions/models.py:229
 msgid "month of year"
-msgstr ""
+msgstr "månad på året"
 
 #: jsanctions/models.py:230
 msgid "year"
-msgstr ""
+msgstr "år"
 
 #: jsanctions/models.py:232 jsanctions/models.py:264
 msgid "place"
-msgstr ""
+msgstr "plats"
 
 #: jsanctions/models.py:233 jsanctions/models.py:246 jsanctions/models.py:266
 msgid "country"
-msgstr ""
+msgstr "Land"
 
 #: jsanctions/models.py:240
 msgid "birth dates"
-msgstr ""
+msgstr "födelsedatum"
 
 #: jsanctions/models.py:253
 msgid "citizenship"
-msgstr ""
+msgstr "medborgarskap"
 
 #: jsanctions/models.py:254
 msgid "citizenships"
-msgstr ""
+msgstr "medborgarskap"
 
 #: jsanctions/models.py:260
 msgid "street"
-msgstr ""
+msgstr "gata"
 
 #: jsanctions/models.py:261
 msgid "p.o. box"
-msgstr ""
+msgstr "postlåda"
 
 #: jsanctions/models.py:263
 msgid "as at listing time"
-msgstr ""
+msgstr "som vid noteringstillfället"
 
 #: jsanctions/models.py:273
 msgid "address"
-msgstr ""
+msgstr "adress"
 
 #: jsanctions/models.py:274
 msgid "addresses"
-msgstr ""
+msgstr "adresser"
 
 #: jsanctions/models.py:282
 msgid "source"
-msgstr ""
+msgstr "källa"
 
 #: jsanctions/models.py:283
 msgid "designation details"
-msgstr ""
+msgstr "beteckningsdetaljer"
 
 #: jsanctions/models.py:284
 msgid "United Nation identifier"
-msgstr ""
+msgstr "FN-identifierare"
 
 #: jsanctions/models.py:285
 msgid "EU reference number"
-msgstr ""
+msgstr "EU-referensnummer"
 
 #: jsanctions/ofac.py:41
 msgid "Invalid date value {}"
-msgstr ""
+msgstr "Ogiltigt datumvärde {}"
 
 #: jsanctions/ofac.py:85
 msgid "UID missing"
-msgstr ""
+msgstr "UID saknas"
 
 #: jsanctions/un.py:53
 msgid "DATAID missing"
-msgstr ""
+msgstr "DATAID saknas"
